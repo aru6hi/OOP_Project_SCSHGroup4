@@ -38,7 +38,7 @@ public abstract class User{
 		return this.ID;
 	}
 	
-	public Role getRole() {
-		return this.role;
+	public boolean isRole(Role role) {
+		return this.role == role;
 	}
 }
