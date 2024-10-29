@@ -1,5 +1,3 @@
-package HMS;
-
 public class Doctor extends User{
 	private String name;
 	private char gender;

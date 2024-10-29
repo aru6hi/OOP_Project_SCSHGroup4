@@ -8,7 +8,7 @@ public class MedicalRecordMgr {
     }
 
     // Find a medical record by patient ID
-    public MedicalRecord findByID(int patientID) {
+    public MedicalRecord findByID(String patientID) {
         if (medicalRecords == null || MedicalRecord.getNumOfRecords() == 0) return null;
         
         for (MedicalRecord record : medicalRecords) {
@@ -83,5 +83,6 @@ public class MedicalRecordMgr {
             default:
                 System.out.println("Invalid option");
         }
+        sc.close();
     }
 }

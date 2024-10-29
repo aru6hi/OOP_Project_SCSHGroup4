@@ -1,5 +1,3 @@
-package HMS;
-
 public abstract class SecurityTools {
 	char key = 'Q';
 	

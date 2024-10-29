@@ -1,5 +1,3 @@
-package HMS;
-
 public abstract class User extends SecurityTools{
 	private final String ID;
 	private String encryptedPassword; //Never decrypt this for security

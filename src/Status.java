@@ -1,5 +1,3 @@
-package HMS;
-
 public enum Status {
 	COMPLETED,
 	CONFIRMED,

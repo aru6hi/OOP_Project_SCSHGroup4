@@ -49,8 +49,8 @@ public class MedicalRecord {
         return numOfRecords;
     }
 
-    public int getPatientID() {
-        return patient.getPatientID();
+    public String getPatientID() {
+        return patient.getID();
     }
 
     public static void incrementRecords() {

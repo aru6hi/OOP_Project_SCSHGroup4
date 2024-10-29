@@ -1,4 +1,3 @@
-package HMS;
 
 public class Admin extends User{
 	private String name;
