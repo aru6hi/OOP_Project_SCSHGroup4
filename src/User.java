@@ -1,4 +1,4 @@
-public abstract class User extends SecurityTools{
+public abstract class User{
 	private final String ID;
 	private String encryptedPassword; //Never decrypt this for security
 	private final Role role;
@@ -8,14 +8,14 @@ public abstract class User extends SecurityTools{
 		this.role = role;
 		
 		//Encrypt raw default password
-		String encPass = encryptPassword("password");
+		String encPass = SecurityTools.encryptPassword("password");
 		
 		this.encryptedPassword = encPass;
 	}
 	
 	public void setNewPassword(String rawNewPassword) {
 		//Encrypt raw new password
-		String encPass = encryptPassword(rawNewPassword);
+		String encPass = SecurityTools.encryptPassword(rawNewPassword);
 				
 		this.encryptedPassword = encPass;
 	}
@@ -24,7 +24,7 @@ public abstract class User extends SecurityTools{
 		//Pass in the input password
 		//It will encrypt it and compare to encrypted password
 		//A match means the input is the same as the actual password
-		String encPass = encryptPassword(inputPassword);
+		String encPass = SecurityTools.encryptPassword(inputPassword);
 		
 		if (encPass.equals(encryptedPassword)) {
 			return true;
