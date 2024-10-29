@@ -1,7 +1,9 @@
-public abstract class SecurityTools {
+public final class SecurityTools {
 	char key = 'Q';
+
+	private SecurityTools() {};
 	
-	protected String encryptPassword(String rawPassword) {
+	public static String encryptPassword(String rawPassword) {
 		//A simple XOR cipher for encrypting passwords
 		//Run it again on an encrypted password to decrypt
 		String out = ""; 
