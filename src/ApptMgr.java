@@ -1,10 +1,11 @@
+package HMS;
+
 import java.util.ArrayList;
 
 public class ApptMgr {
-	private ArrayList<Appointment> allAppt;
+	private static ArrayList<Appointment> allAppt = new ArrayList<Appointment>();;
 	
 	public ApptMgr() {
-		this.allAppt = new ArrayList<Appointment>();
 	}
 	
 	public void viewAll() {

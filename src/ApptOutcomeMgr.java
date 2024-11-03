@@ -1,10 +1,11 @@
+package HMS;
+
 import java.util.ArrayList;
 
 public class ApptOutcomeMgr {
-	private ArrayList<ApptOutRecord> allApptOutcomes;
+	private static ArrayList<ApptOutRecord> allApptOutcomes = new ArrayList<ApptOutRecord>();;
 	
 	public ApptOutcomeMgr() {
-		this.allApptOutcomes = new ArrayList<ApptOutRecord>();
 	}
 	
 	public void viewAll() {
