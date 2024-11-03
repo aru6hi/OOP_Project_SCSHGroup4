@@ -1,5 +1,3 @@
-package HMS;
-
 public class ApptOutRecord {
 	//Data from corresponding completed appt
 	private String apptID;
