@@ -74,10 +74,18 @@ public class InventoryManager {
 	public void printLowStockMeds(){
 		System.out.println("Medicines low on stock: \n");
 		for (Medicine medicine: medMap.values()){
-			System.out.println(getMedicineStock(medicine.getMedName()));
+			if (currentStock < stockThreshold){
+				System.out.println(getMedicineStock(medicine.getMedName()));
+			}
 		}
 	}
-	
+ 
+ 	public void printInventory(){
+  		System.out.println("Medicine Inventory List: \n");
+  		for (Medicine medicine: medMap.values()){
+   			System.out.println(getMedicineStock(medicine.getMedName()));
+  		}
+ 	}
 
 }	
 

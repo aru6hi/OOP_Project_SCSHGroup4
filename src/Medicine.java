@@ -28,4 +28,8 @@ public class Medicine {
 	public boolean shouldAlert() {
 		return currentStock < alertLimit;
 	}
+
+	public void updateAlertLimit(){
+  		this.alertLimit = alertLimit;
+ 	}
 }
