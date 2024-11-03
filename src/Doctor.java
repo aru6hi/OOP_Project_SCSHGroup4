@@ -1,5 +1,3 @@
-package HMS;
-
 import java.util.Scanner;
 import java.util.ArrayList;
 
