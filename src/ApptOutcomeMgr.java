@@ -1,3 +1,5 @@
+package HMS;
+
 import java.util.ArrayList;
 
 public class ApptOutcomeMgr {

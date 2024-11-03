@@ -1,3 +1,5 @@
+package HMS;
+
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -74,7 +76,7 @@ public class Doctor extends User{
 		System.out.println("Appointment with " + patientID + " @ " + date + " " + time + " Scheduled!");
 	}
 	
-	public void viewAcceptOrCancelPendingAppt(Scanner sc, ApptMgr apptmgr) {
+	public void confirmOrCancelPendingAppt(Scanner sc, ApptMgr apptmgr) {
 		//This let's them see appointments so they can either confirm or decline
 		ArrayList<Appointment> pendingAppts = apptmgr.findAllByStatus(Status.PENDING);
 		
