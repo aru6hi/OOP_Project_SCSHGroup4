@@ -1,5 +1,3 @@
-package HMS;
-
 public enum Service {
 	CONSULTATION,
 	XRAY,
