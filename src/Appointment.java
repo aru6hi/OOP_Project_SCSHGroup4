@@ -1,5 +1,3 @@
-package HMS;
-
 public class Appointment {
 	private String doctorID;
 	private String patientID;
