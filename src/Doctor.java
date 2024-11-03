@@ -1,9 +1,9 @@
 public class Doctor extends User{
 	private String name;
-	private char gender;
+	private String gender;
 	private int age;
 	
-	public Doctor(String ID, String name, char gender, int age) {
+	public Doctor(String ID, String name, String gender, int age) {
 		super(ID, Role.DOCTOR);
 		
 		this.name = name;
@@ -15,7 +15,7 @@ public class Doctor extends User{
 		return this.name;
 	}
 	
-	public char getGender() {
+	public String getGender() {
 		return this.gender;
 	}
 	

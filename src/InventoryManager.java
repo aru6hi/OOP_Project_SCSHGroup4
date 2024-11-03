@@ -18,8 +18,6 @@ public class InventoryManager {
 	}
 
 
-
-
 	public void initializeInventory(){
 		File medicineList = new File("Medicine_List.csv");
 		Scanner scMedList = new Scanner(medicineList);

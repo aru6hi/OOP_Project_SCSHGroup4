@@ -1,10 +1,10 @@
 
 public class Admin extends User{
 	private String name;
-	private char gender;
+	private String gender;
 	private int age;
 	
-	public Admin(String ID, String name, char gender, int age) {
+	public Admin(String ID, String name, String gender, int age) {
 		super(ID, Role.ADMIN);
 		
 		this.name = name;
@@ -16,7 +16,7 @@ public class Admin extends User{
 		return this.name;
 	}
 	
-	public char getGender() {
+	public String getGender() {
 		return this.gender;
 	}
 	
