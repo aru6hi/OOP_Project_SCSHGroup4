@@ -1,7 +1,9 @@
+package HMS;
+
 import java.util.ArrayList;
 
 public class ApptMgr {
-	private static ArrayList<Appointment> allAppt = new ArrayList<Appointment>();;
+	private ArrayList<Appointment> allAppt = new ArrayList<Appointment>();;
 	
 	public ApptMgr() {
 	}
@@ -16,6 +18,15 @@ public class ApptMgr {
 		Date date = new Date(day, month, year);
 		
 		Appointment newAppt = new Appointment(doctorID, patientID, date, time);
+		
+		allAppt.add(newAppt);
+	}
+	
+	public void addAppt(String doctorID, String patientID, int day, int month, int year, String time, Status status) {
+		
+		Date date = new Date(day, month, year);
+		
+		Appointment newAppt = new Appointment(doctorID, patientID, date, time, status);
 		
 		allAppt.add(newAppt);
 	}
@@ -60,16 +71,14 @@ public class ApptMgr {
 		return outList;
 	}
 	
-	public ArrayList<Appointment> findAllByApptID(String targetApptID) {
-		
-		ArrayList<Appointment> outList = new ArrayList<Appointment>();
+	public Appointment findByApptID(String targetApptID) {
 		
 		for (Appointment appt : allAppt) {
 			if (appt.getApptID().equals(targetApptID)) {
-				outList.add(appt);
+				return appt;
 			}
 		}
-		return outList;
+		throw new RuntimeException("No such ApptID");
 	}
 	
 	//All split so I can add functionality for each action
@@ -85,10 +94,7 @@ public class ApptMgr {
 		appt.setStatus(Status.CONFIRMED);
 	}
 	
-	public ApptOutRecord completeAppt(Appointment appt) {
-		//Generates and outcome record and returns it
-		ApptOutRecord record = new ApptOutRecord(appt.getApptID(), appt.getDate());
+	public void completeAppt(Appointment appt) {
 		appt.setStatus(Status.COMPLETED);
-		return record;
 	}
 }

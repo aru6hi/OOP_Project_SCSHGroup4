@@ -1,7 +1,9 @@
+package HMS;
+
 import java.util.ArrayList;
 
 public class ApptOutcomeMgr {
-	private static ArrayList<ApptOutRecord> allApptOutcomes = new ArrayList<ApptOutRecord>();;
+	private ArrayList<ApptOutRecord> allApptOutcomes = new ArrayList<ApptOutRecord>();;
 	
 	public ApptOutcomeMgr() {
 	}
@@ -11,8 +13,8 @@ public class ApptOutcomeMgr {
 		System.out.println(allApptOutcomes);
 	}
 	
-	public void addApptOutRecord(String apptID, Date date) {
-		ApptOutRecord apptOut = new ApptOutRecord(apptID, date);
+	public void addApptOutRecord(String apptID, Date date, String service) {
+		ApptOutRecord apptOut = new ApptOutRecord(apptID, date, service);
 		
 		allApptOutcomes.add(apptOut);
 	}
@@ -50,16 +52,14 @@ public class ApptOutcomeMgr {
 		return outList;
 	}
 	
-	public ArrayList<ApptOutRecord> findAllByApptID(String apptID) {
-		
-		ArrayList<ApptOutRecord> outList = new ArrayList<ApptOutRecord>();
+	public ApptOutRecord findByApptID(String apptID) {
 		
 		for (ApptOutRecord appt : allApptOutcomes) {
 			if (appt.getApptID().equals(apptID)) {
-				outList.add(appt);
+				return appt;
 			}
 		}
-		return outList;
+		throw new RuntimeException("No such ApptID");
 	}
 	
 }

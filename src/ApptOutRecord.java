@@ -1,20 +1,23 @@
+package HMS;
+
 public class ApptOutRecord {
 	//Data from corresponding completed appt
 	private String apptID;
 	private Date date;
 	
 	//Own data
-	private Service service;
+	private String service;
 	private Status status = Status.PENDING; //defaults to pending
 	private String notes;
 	private String prescription;
 	
-	public ApptOutRecord(String apptID, Date date) {
+	public ApptOutRecord(String apptID, Date date, String service) {
 		this.apptID = apptID;
 		this.date = date;
+		this.service = service;
 	}
 	
-	public ApptOutRecord(String apptID, Date date, Service service, Status status) {
+	public ApptOutRecord(String apptID, Date date, String service, Status status) {
 		this.apptID = apptID;
 		this.date = date;
 		this.service = service;
@@ -38,7 +41,7 @@ public class ApptOutRecord {
 		this.status = status;
 	}
 	
-	public void setService(Service service) {
+	public void setService(String service) {
 		this.service = service;
 	}
 	
