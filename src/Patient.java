@@ -3,24 +3,33 @@ import java.util.Scanner;
 public class Patient extends User{
 	private String name;
 	private String DOB;
-	private char gender;
+	private String gender;
 	private String bloodType;
 	private int phoneNum;
 	private String email;
+	private int age;
+	private String id;
 	
-	public Patient(String ID, String name, String DOB, char gender, String bloodType, int phoneNum, String email) {
+	public Patient(String ID, String name, String DOB, String gender, String bloodType, int phoneNum, String email, int age) {
 		super(ID, Role.PATIENT);
-		
+		this.id=ID;
 		this.name = name;
 		this.DOB = DOB;
 		this.gender = gender;
 		this.bloodType = bloodType;
 		this.phoneNum = phoneNum;
 		this.email = email;
+		this.age=age;
+	}
+	public String getID(){
+		return this.id;
 	}
 	
 	public String getName() {
 		return this.name;
+	}
+	public int getAge(){
+		return this.age;
 	}
 	
 	public String getDOB() {
@@ -35,7 +44,7 @@ public class Patient extends User{
 		return this.email;
 	}
 	
-	public char getGender() {
+	public String getGender() {
 		return this.gender;
 	}
 	

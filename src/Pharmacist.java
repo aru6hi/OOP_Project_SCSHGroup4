@@ -12,7 +12,7 @@ public class Pharmacist extends User{
 		this.age = age;
 	}
 
-	public injectInventory(InventoryManager inventory){
+	public void injectInventory(InventoryManager inventory){
   		this.inventory = inventory;
  	} //we need something like pharmacist.setInventory(inventory); in mainapp
 
