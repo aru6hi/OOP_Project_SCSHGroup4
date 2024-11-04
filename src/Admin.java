@@ -12,7 +12,7 @@ public class Admin extends User{
 		this.age = age;
 	}
 
-	public injectInventory(InventoryManager inventory){
+	public void injectInventory(InventoryManager inventory){
   		this.inventory = inventory;
  	} //we need something like pharmacist.setInventory(inventory); in mainapp
 
@@ -28,7 +28,7 @@ public class Admin extends User{
 	public void updateAlertAdmin(String medName, int newAmount){
 		Medicine medicine = inventory.getMedicine(medName);
 		medicine.updateAlertLimit(newAmount); 
-		System.println(medName + " alert levels updated to " + newAmount);
+		System.out.println(medName + " alert levels updated to " + newAmount);
 		//newAmount is the how much you want to alert to be 	
 	}
 
@@ -36,20 +36,20 @@ public class Admin extends User{
 	public void updateStockAdmin(String medName, int newAmount){
 		Medicine medicine = inventory.getMedicine(medName);
 		medicine.updateCurrentStock(newAmount); 
-		System.println(medName + " has been replenished to " + newAmount);
+		System.out.println(medName + " has been replenished to " + newAmount);
 		//newAmount is the how much you want to replenish till 	
 	}
 
 	public void addStockAdmin(String medName, int byAmount){
 		Medicine medicine = inventory.getMedicine(medName);
 		medicine.updateCurrentStock(newAmount + byAmount); 
-		System.println(byAmount + " of " + medName + " has been added");	
+		System.out.println(byAmount + " of " + medName + " has been added");	
 	}
 
 	public void removeStockAdmin(String medName, int byAmount){
 		Medicine medicine = inventory.getMedicine(medName);
 		medicine.updateCurrentStock(newAmount - byAmount); 
-		System.println(byAmount + " of "medName + " has been removed");
+		System.out.println(byAmount + " of "medName + " has been removed");
 	}
 	
 	public String getName() {
