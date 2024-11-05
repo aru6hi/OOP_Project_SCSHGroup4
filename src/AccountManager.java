@@ -113,7 +113,7 @@ public class AccountManager {
     }
 
     // LOGIN METHOD
-    private void login() {
+    private User login() {
         System.out.print("Enter ID: ");
         String id = sc.nextLine();
 
@@ -125,7 +125,7 @@ public class AccountManager {
             role = Role.valueOf(roleInput);
         } catch (IllegalArgumentException e) {
             System.out.println("Invalid role entered. Login failed.");
-            return;
+            return null;
         }
 
         System.out.print("Enter password: ");
@@ -136,11 +136,14 @@ public class AccountManager {
         if (user != null) {
             if (user.authenticatePassword(password)) {
                 System.out.println("Login successful! Welcome " + user.getId());
+                return user;
             } else {
                 System.out.println("Incorrect password. Please try again.");
+                return null;
             }
         } else {
             System.out.println("User not found or role mismatch.");
+            return null;
         }
     }
 
@@ -153,8 +156,4 @@ public class AccountManager {
         return null; // User not found
     }
 
-    public static void main(String[] args) {
-        AccountManager app = new AccountManager();
-        app.start();
-    }
 }
