@@ -1,5 +1,3 @@
-package HMS;
-
 import java.util.ArrayList;
 public class Prescription {
 	private ArrayList<PrescribedMedicine> prescriptionList = new ArrayList<PrescribedMedicine>();
