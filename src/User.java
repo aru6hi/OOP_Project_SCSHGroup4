@@ -39,6 +39,11 @@ public abstract class User{
 	}
 	
 	public boolean isRole(Role role) {
+		//In case we ever want to give multiple roles, this would be useful
 		return this.role == role;
+	}
+
+	public Role getRole() {
+		return this.role;
 	}
 }
