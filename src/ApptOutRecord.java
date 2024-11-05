@@ -1,3 +1,5 @@
+package HMS;
+
 public class ApptOutRecord {
 	//Data from corresponding completed appt
 	private String apptID;
@@ -7,7 +9,7 @@ public class ApptOutRecord {
 	private String service;
 	private Status status = Status.PENDING; //defaults to pending
 	private String notes;
-	private String prescription;
+	private Prescription prescription = new Prescription();
 	
 	public ApptOutRecord(String apptID, Date date, String service) {
 		this.apptID = apptID;
@@ -47,8 +49,8 @@ public class ApptOutRecord {
 		this.notes = notes;
 	}
 	
-	public void addPrescription(String prescription) {
-		this.prescription = prescription;
+	public void addPrescription(String name, String dosage) {
+		prescription.addPrescription(name, dosage);
 	}
 	
 	public Status getStatus() {

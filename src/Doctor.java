@@ -1,12 +1,14 @@
+package HMS;
+
 import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Doctor extends User{
 	private String name;
-	private String gender;
+	private char gender;
 	private int age;
 	
-	public Doctor(String ID, String name, String gender, int age) {
+	public Doctor(String ID, String name, char gender, int age) {
 		super(ID, Role.DOCTOR);
 		
 		this.name = name;
@@ -18,7 +20,7 @@ public class Doctor extends User{
 		return this.name;
 	}
 	
-	public String getGender() {
+	public char getGender() {
 		return this.gender;
 	}
 	
@@ -225,7 +227,7 @@ public class Doctor extends User{
 	public void addPrescription(Scanner sc, ApptMgr apptmgr, ApptOutcomeMgr apptoutmgr) {
 		int jnput;
 		ApptOutRecord selectedAppt;
-		String prescription;
+		String medName, dosage;
 		do {
 			viewMyApptOutRecords(sc, apptmgr, apptoutmgr);
 			System.out.println("1) Add Prescription");
@@ -239,10 +241,14 @@ public class Doctor extends User{
 				sc.nextLine(); //This consumes the \n left behind
 				selectedAppt = apptoutmgr.findByApptID(selectedApptID);
 				
-				System.out.println("Enter Prescription:");
-				prescription = sc.nextLine();
+				System.out.println("Enter Medicine Name:");
+				medName = sc.next();
+				sc.nextLine();
+				System.out.println("Enter Dosage:");
+				dosage = sc.next();
+				sc.nextLine();
 				
-				selectedAppt.addPrescription(prescription);
+				selectedAppt.addPrescription(medName, dosage);
 			}
 		} while (jnput < 2);
 	}
