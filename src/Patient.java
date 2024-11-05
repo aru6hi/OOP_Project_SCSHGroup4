@@ -103,7 +103,7 @@ public class Patient extends User{
 		sc.nextLine();
 		
 		Appointment oldAppt = apptmgr.findByApptID(selectedApptID);
-		oldAppt.setStatus(Status.CANCELLED);
+		oldAppt.setStatus(Status.OPEN);
 		System.out.println(oldAppt);
 		
 		//Booking time
