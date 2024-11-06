@@ -8,7 +8,7 @@ public class MedicalRecord {
     // Constructor to initialize fields
     public MedicalRecord() {
         this.diagnoses = "EMPTY"; 
-        this.medication = "EMPTY";
+        this.medication="EMPTY";
         this.pastTreatments = "EMPTY";
     }
 
@@ -22,8 +22,8 @@ public class MedicalRecord {
     }
 
     public void setMedication(String medication) {
-        this.medication = medication;
-    }
+		this.medication=medication;
+	}
 
     public void setPastTreatments(String pastTreatments) {
         this.pastTreatments = pastTreatments;
