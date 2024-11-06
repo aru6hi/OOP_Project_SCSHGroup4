@@ -1,18 +1,117 @@
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class AccountManager {
 
-    private User[] users; // Array to hold different User types
-    private int userCount;
-    private final int MAX_USERS = 100;
+    private ArrayList<User> users; // Array to hold different User types
     private Scanner sc;
 
     public AccountManager() {
         sc = new Scanner(System.in);
-        users = new User[MAX_USERS];
-        userCount = 0;
+        users = new ArrayList<>();
+        initializePatientsfromFile(); // Load patients from file
+        initializeStafffromFile();   // Load staff from file
     }
 
+
+    private void initializePatientsfromFile() {
+        try {
+            File patientList = new File("Data Files\\Patient_List.xlsx");
+            Scanner scPatientList = new Scanner(patientList);
+            
+            // Skip the header (first line)
+            if (scPatientList.hasNextLine()) {
+                scPatientList.nextLine(); // Skipping the header line
+            }
+    
+            while (scPatientList.hasNextLine()) {
+                String data = scPatientList.nextLine();
+                String[] values = data.split(",");
+                
+                // Parse the patient details from the CSV line
+                String id = values[0];
+                String name = values[1];
+                String dob = values[2];
+                String gender = values[3];
+                String bloodType = values[4];
+                String email = values[5];
+    
+                // Create a new Patient object
+                Patient patient = new Patient(id, name, dob, gender, bloodType, email);
+                
+                // Add the patient to the users ArrayList
+                users.add(patient);  // Adds to the end of the list
+            }
+            
+            scPatientList.close();
+            
+        } catch (FileNotFoundException e) {
+            System.out.println("Patient List file not found!");
+        }
+    }
+
+    
+    private void initializeStafffromFile() {
+        try {
+            File staffList = new File("Data Files\\Staff_List.csv");
+            Scanner scStaffList = new Scanner(staffList);
+            
+            // Skip the header (first line)
+            if (scStaffList.hasNextLine()) {
+                scStaffList.nextLine(); // Skipping the header line
+            }
+    
+            while (scStaffList.hasNextLine()) {
+                String data = scStaffList.nextLine();
+                String[] values = data.split(",");
+    
+                // Parse the staff details from the CSV line
+                String id = values[0];
+                String name = values[1];
+                String roleString = values[2];
+                String gender = values[3];
+                int age = Integer.parseInt(values[4]);
+                String password = values[5];
+    
+                Role role;
+                try {
+                    role = Role.valueOf(roleString.toUpperCase());  // Convert role string to Role enum
+                } catch (IllegalArgumentException e) {
+                    System.out.println("Invalid role for staff member: " + roleString);
+                    continue;  // Skip invalid roles
+                }
+    
+                // Create staff member based on role
+                User staffMember = null;
+                switch (role) {
+                    case DOCTOR:
+                        staffMember = new Doctor(id, name, gender, age);
+                        break;
+                    case PHARMACIST:
+                        staffMember = new Pharmacist(id, name, gender, age);
+                        break;
+                    // Add cases for other roles as needed
+                    default:
+                        System.out.println("Unsupported role in staff list: " + roleString);
+                        continue;  // Skip unsupported roles
+                }
+    
+                // Set the password and add the staff member to the users list
+                if (staffMember != null) {
+                    staffMember.setNewPassword(password);  // Set password using the method in User class
+                    users.add(staffMember);  // Adds the staff member to the users ArrayList
+                }
+            }
+            
+            scStaffList.close();
+            
+        } catch (FileNotFoundException e) {
+            System.out.println("Staff list file not found!");
+        }
+    }
+    
     public void start() {
         boolean exit = false;
 
@@ -44,6 +143,7 @@ public class AccountManager {
         sc.close();
     }
 
+    
     //REGISTRATION METHOD
     private void register() {
         System.out.print("Enter ID for new account: ");
@@ -108,7 +208,7 @@ public class AccountManager {
         }
 
         user.setNewPassword(password);
-        users[userCount++] = user;
+        users.add(user);
         System.out.println(role + " account created successfully for " + name);
     }
 
@@ -148,12 +248,16 @@ public class AccountManager {
     }
 
     private User findUser(String id, Role role) {
-        for (int i = 0; i < userCount; i++) {
-            if (users[i].getId().equals(id) && users[i].isRole(role)) {
-                return users[i];
+        for (User user : users) { // Iterate over each user in the ArrayList
+            if (user.getId().equals(id) && user.isRole(role)) {
+                return user; // Return the user if ID and role match
             }
         }
         return null; // User not found
     }
 
+    public static void main(String[] args) {
+        AccountManager app = new AccountManager();
+        app.start(); // Starts the interactive menu
+    }
 }

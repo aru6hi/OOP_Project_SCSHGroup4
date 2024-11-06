@@ -1,9 +1,9 @@
 import java.io.File;
 import java.util.Scanner;
 import java.io.FileNotFoundException;
-import java.io.Map;
-import java.io.HashMap;
-import java.io.ArrayList;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.ArrayList;
 
 public class InventoryManager {
 	private Map<String, Medicine> medMap;
@@ -19,7 +19,7 @@ public class InventoryManager {
 
 
 	public void initializeInventory(){
-		File medicineList = new File("Medicine_List.csv");
+		File medicineList = new File("Data Files\\Medicine_List.xlsx");
 		Scanner scMedList = new Scanner(medicineList);
 		
 		while (scMedList.hasNextLine()) {
