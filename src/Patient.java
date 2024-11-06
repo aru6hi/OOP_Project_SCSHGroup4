@@ -21,6 +21,19 @@ public class Patient extends User{
 		this.email = email;
 		this.age=age;
 	}
+
+	public Patient(String ID, String name, String DOB, String gender, String bloodType, int age) {
+		super(ID, Role.PATIENT);
+		this.id=ID;
+		this.name = name;
+		this.DOB = DOB;
+		this.gender = gender;
+		this.bloodType = bloodType;
+		this.phoneNum = -1;
+		this.email = null;
+		this.age=age;
+	}
+	
 	public String getID(){
 		return this.id;
 	}
