@@ -32,7 +32,6 @@ public class Patient extends User{
 		this.bloodType = bloodType;
 		this.phoneNum = -1;
 		this.email = null;
-		this.age=age;
 	}
 	
 	public String getID(){
