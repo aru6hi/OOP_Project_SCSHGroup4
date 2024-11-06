@@ -1,16 +1,17 @@
 import java.util.Scanner;
 import java.util.ArrayList;
+import javax.xml.transform.Source;
 
 public class Doctor extends User{
 	private String name;
-	private char gender;
+	private String gender;
 	private int age;
 	
-	public Doctor(String ID, String name, char gender, int age) {
+	public Doctor(String ID, String name, String gENDER2, int age) {
 		super(ID, Role.DOCTOR);
 		
 		this.name = name;
-		this.gender = gender;
+		this.gender = gENDER2;
 		this.age = age;
 	}
 	
@@ -250,4 +251,77 @@ public class Doctor extends User{
 			}
 		} while (jnput < 2);
 	}
+
+	public void getPatientHistory(Scanner sc, MedicalRecordMgr medRecordMgr){
+		System.out.println("Enter Patient ID: ");
+		String patientID=sc.nextLine();
+		MedicalRecord medRecord=medRecordMgr.findByID(patientID);
+		medRecordMgr.printRecord(medRecord);
+	}
+
+	public void addNewPatientRecord(Scanner sc, MedicalRecordMgr medRecordMgr) {
+		System.out.println("Enter Patient ID: ");
+		String patientID = sc.nextLine();
+		
+		System.out.println("Enter Patient Name: ");
+		String name = sc.nextLine();
+	
+		System.out.println("Enter Date of Birth (DOB) of Patient: ");
+		String DOB = sc.nextLine();
+		
+		System.out.println("Enter Gender of Patient: ");
+		String gender = sc.nextLine();
+		
+		System.out.println("Enter Blood Type of Patient: ");
+		String bloodType = sc.nextLine();
+		
+		System.out.println("Enter Phone Number of Patient: ");
+		int phoneNum = sc.nextInt();
+		sc.nextLine(); 
+		System.out.println("Enter Email of Patient: ");
+		String email = sc.nextLine();
+	
+		System.out.println("Enter Age of Patient: ");
+		int age = sc.nextInt();
+		sc.nextLine(); 
+		
+		Patient newPatient = new Patient(patientID, name, DOB, gender, bloodType, phoneNum, email, age);
+	
+		String diagnoses = null;
+		System.out.println("Do you want to add patient's diagnoses? (Y/N)");
+		if (sc.nextLine().equalsIgnoreCase("Y")) {
+			System.out.println("Enter diagnoses: ");
+			diagnoses = sc.nextLine();
+		}
+	
+		String medication = null;
+		System.out.println("Do you want to add patient's medications? (Y/N)");
+		if (sc.nextLine().equalsIgnoreCase("Y")) {
+			System.out.println("Enter medication (comma-separated if multiple): ");
+			medication = sc.nextLine();
+		}
+	
+		String pastTreatments = null;
+		System.out.println("Do you want to add patient's past treatments? (Y/N)");
+		if (sc.nextLine().equalsIgnoreCase("Y")) {
+			System.out.println("Enter past treatments (comma-separated if multiple): ");
+			pastTreatments = sc.nextLine();
+		}
+		
+		if(medRecordMgr.findByID(patientID)==null){
+			medRecordMgr.addRecord(newPatient, diagnoses, medication, pastTreatments);
+			System.out.println("Patient record added successfully.");
+		}
+		else{
+			System.out.println("Patient record already exists.");
+		}
+	}
+
+	public void updateMedicalRecord(Scanner sc, MedicalRecordMgr medRecordMgr) {
+		System.out.println("Enter patient ID to update the record: ");
+		String patientID=sc.nextLine();
+		MedicalRecord mRecord=medRecordMgr.findByID(patientID);
+		medRecordMgr.editRecord(mRecord);
+	}
+	
 }

@@ -152,4 +152,9 @@ public class Patient extends User{
 		System.out.println(this.getId() + "'s Past Outcome Records:");
 		System.out.println(myApptOutRecords);
 	}
+
+	public void viewMedicalRecord(MedicalRecordMgr medRecordMgr){
+		MedicalRecord medRecord=medRecordMgr.findByID(this.getId());
+		medRecordMgr.printRecord(medRecord);
+	}
 }

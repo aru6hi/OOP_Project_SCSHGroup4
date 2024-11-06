@@ -1,11 +1,8 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class MedicalRecordMgr {
-    private MedicalRecord[] medicalRecords;
-
-    public MedicalRecordMgr() {
-        medicalRecords = new MedicalRecord[100]; 
-    }
+    private ArrayList<MedicalRecord> medicalRecords = new ArrayList<MedicalRecord>();
 
     // Find a medical record by patient ID
     public MedicalRecord findByID(String patientID) {
@@ -27,7 +24,7 @@ public class MedicalRecordMgr {
         mRecord.setMedication(medication);
         mRecord.setPastTreatments(pastTreatments);
         
-        medicalRecords[MedicalRecord.getNumOfRecords()] = mRecord;
+        medicalRecords.set(MedicalRecord.getNumOfRecords(), mRecord);
         MedicalRecord.incrementRecords(); 
     }
 
