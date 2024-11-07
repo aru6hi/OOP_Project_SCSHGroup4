@@ -15,13 +15,12 @@ public class MedicalRecordMgr {
         }
         return null;
     }
-
     // Add a medical record
-    public void addRecord(Patient patient, String diagnoses, String medication, String pastTreatments) {
+    public void addRecord(Scanner sc, Patient patient, String diagnoses, String pastTreatments) {
         MedicalRecord mRecord = new MedicalRecord();
         mRecord.setPatient(patient);
         mRecord.setDiagnoses(diagnoses);
-        mRecord.setMedication(medication);
+        mRecord.addMedication(sc);
         mRecord.setPastTreatments(pastTreatments);
         
         medicalRecords.set(MedicalRecord.getNumOfRecords(), mRecord);
@@ -68,10 +67,21 @@ public class MedicalRecordMgr {
                 medRecord.setDiagnoses(diag);
                 break;
             case 2:
-                System.out.println("Enter new medications: ");
-                String med = sc.nextLine();
-                medRecord.setMedication(med);
-                break;
+                System.out.println("Choose one of the following: ");
+                System.out.println("1. Enter new medication: ");
+                System.out.println("2. Remove existing medication: ");
+                int choice=sc.nextInt();
+                sc.nextLine();
+                switch(choice){
+                    case 1:
+                        medRecord.addMedication(sc);
+                        break;
+                    case 2:
+                        medRecord.removeMedication(sc);
+                        break;
+                    default:
+                        System.out.println("Invalid option");
+                }
             case 3:
                 System.out.println("Enter new past treatments: ");
                 String treatment = sc.nextLine();

@@ -294,13 +294,6 @@ public class Doctor extends User{
 			diagnoses = sc.nextLine();
 		}
 	
-		String medication = null;
-		System.out.println("Do you want to add patient's medications? (Y/N)");
-		if (sc.nextLine().equalsIgnoreCase("Y")) {
-			System.out.println("Enter medication (comma-separated if multiple): ");
-			medication = sc.nextLine();
-		}
-	
 		String pastTreatments = null;
 		System.out.println("Do you want to add patient's past treatments? (Y/N)");
 		if (sc.nextLine().equalsIgnoreCase("Y")) {
@@ -309,7 +302,7 @@ public class Doctor extends User{
 		}
 		
 		if(medRecordMgr.findByID(patientID)==null){
-			medRecordMgr.addRecord(newPatient, diagnoses, medication, pastTreatments);
+			medRecordMgr.addRecord(sc, newPatient, diagnoses, pastTreatments);
 			System.out.println("Patient record added successfully.");
 		}
 		else{
@@ -323,5 +316,6 @@ public class Doctor extends User{
 		MedicalRecord mRecord=medRecordMgr.findByID(patientID);
 		medRecordMgr.editRecord(mRecord);
 	}
+	
 	
 }
