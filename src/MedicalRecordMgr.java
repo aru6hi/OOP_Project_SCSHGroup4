@@ -82,6 +82,7 @@ public class MedicalRecordMgr {
                     default:
                         System.out.println("Invalid option");
                 }
+                break;
             case 3:
                 System.out.println("Enter new past treatments: ");
                 String treatment = sc.nextLine();
