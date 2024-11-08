@@ -1,17 +1,16 @@
 import java.util.Scanner;
 import java.util.ArrayList;
-import javax.xml.transform.Source;
 
 public class Doctor extends User{
 	private String name;
 	private String gender;
 	private int age;
 	
-	public Doctor(String ID, String name, String gENDER2, int age) {
+	public Doctor(String ID, String name, String gender, int age) {
 		super(ID, Role.DOCTOR);
 		
 		this.name = name;
-		this.gender = gENDER2;
+		this.gender = gender;
 		this.age = age;
 	}
 	
