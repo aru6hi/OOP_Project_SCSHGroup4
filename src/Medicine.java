@@ -29,7 +29,7 @@ public class Medicine {
 		return currentStock < alertLimit;
 	}
 
-	public void updateAlertLimit(){
+	public void updateAlertLimit(int alertLimit){
   		this.alertLimit = alertLimit;
  	}
 }
