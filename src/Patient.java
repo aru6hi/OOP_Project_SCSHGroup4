@@ -157,4 +157,27 @@ public class Patient extends User{
 		MedicalRecord medRecord=medRecordMgr.findByID(this.getId());
 		medRecordMgr.printRecord(medRecord);
 	}
+	
+	public void updatePersonalInfo(Scanner sc) {
+		System.out.println("What would you like to update?");
+		System.out.println("1. Email");
+		System.out.println("2. Contact Number");
+		int choice = sc.nextInt();
+		
+		switch (choice) {
+		case 1:
+			System.out.println("Enter new email:");
+			String email = sc.next();
+			sc.nextLine();
+			
+			this.setEmail(email);
+		case 2:
+			System.out.println("Enter new phone number:");
+			int phone = sc.nextInt();
+			
+			this.setPhoneNum(phone);
+		default:
+			System.out.println("Invalid Choice");
+		}
+	}
 }

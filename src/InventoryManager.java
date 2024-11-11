@@ -8,45 +8,43 @@ import java.util.ArrayList;
 public class InventoryManager {
 	private Map<String, Medicine> medMap;
 	private ArrayList<InventoryReplenishment> reqs; 
-	public int stockThreshold;
-	public int currentStock;
-	public String medName;
 	
 	public InventoryManager() {
 		this.medMap = new HashMap<>();
-		this.req = new ArrayList<>();
+		this.reqs = new ArrayList<>();
 	}
-
 
 	public void initializeInventory(){
-		File medicineList = new File("Data Files\\Medicine_List.xlsx");
-		Scanner scMedList = new Scanner(medicineList);
 		
-		while (scMedList.hasNextLine()) {
-			String data = scMedList.nextLine();
+		try {
+			File medicineList = new File("Data Files\\Medicine_List.xlsx");
+			Scanner scMedList = new Scanner(medicineList);
 			
-			String[] values = data.split(",");
+			while (scMedList.hasNextLine()) {
+				String data = scMedList.nextLine();
+				
+				String[] values = data.split(",");
+				
+				String medName = values[0];
+				int currentStock = Integer.parseInt(values[1]);
+				int stockThreshold = Integer.parseInt(values[2]);
+				
+				Medicine medicine = new Medicine(medName, currentStock, stockThreshold);
+				medMap.put(medName, medicine);
+				System.out.println(data);
+			}
 			
-			medName = values[0];
-			currentStock = Integer.parseInt(values[1]);
-			stockThreshold = Integer.parseInt(values[2]);
+			scMedList.close();
 			
-			Medicine medicine = new Medicine(medName, currentStock, stockThreshold);
-			medMap.put(medName, medicine);
-			System.out.println(data);
-		}
-		scMedList.close();
+		} catch (FileNotFoundException e) {
+	        System.out.println("Patient List file not found!");
+	    }
+
 	} 
 
-	
-	
-	public String getMedicineStock(String medName, int currentStock, int stockThreshold) {
-		
-		if (currentStock < stockThreshold) {
-			System.out.println("Stock levels are low for " + medName);
-		}
-		return "The current stock of " + medName + "is " + currentStock;
-	}
+	public Medicine getMedicine(String medName) {
+        return medMap.get(medName); 
+    }
 
 	public InventoryReplenishment newRequest(String medName, int reqAmount) {
 		InventoryReplenishment req = new InventoryReplenishment(medName, reqAmount);
@@ -54,36 +52,31 @@ public class InventoryManager {
 		return req;
 	}
 
-	public void approveReq(int reqID){
+	public void approveReq(String reqID){
 		for (InventoryReplenishment req : reqs){
-			if (req.getReqID() == reqID && req.getReqStatus().equals("Pending")){
-				Medicine medicine = getMedMap(req.getMedicineName());
-				if (medicine != NULL){
+			if (req.getReqID().equals(reqID) && req.getReqStatus() == Status.PENDING){
+				Medicine medicine = getMedicine(req.getMedicineName());
+				if (medicine != null){
 					medicine.updateCurrentStock(req.getReqAmount());
-					req.approveReq();
+					req.requestApprove();
 				}
-				break;
 			}
 		}
 	}
-
-	public Medicine getMedMap(String medName) {
-        return medMap.get(medName); 
-    }
-
+	
 	public void printLowStockMeds(){
 		System.out.println("Medicines low on stock: \n");
 		for (Medicine medicine: medMap.values()){
-			if (currentStock < stockThreshold){
-				System.out.println(getMedicineStock(medicine.getMedName()));
+			if (medicine.shouldAlert()){
+				System.out.println(medicine.getMedName());
 			}
 		}
 	}
- 
+	
  	public void printInventory(){
   		System.out.println("Medicine Inventory List: \n");
   		for (Medicine medicine: medMap.values()){
-   			System.out.println(getMedicineStock(medicine.getMedName()));
+   			System.out.println(medicine);
   		}
  	}
 

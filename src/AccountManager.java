@@ -6,10 +6,8 @@ import java.util.ArrayList;
 public class AccountManager {
 
     private ArrayList<User> users; // Array to hold different User types
-    private Scanner sc;
 
     public AccountManager() {
-        sc = new Scanner(System.in);
         users = new ArrayList<>();
         initializePatientsfromFile(); // Load patients from file
         initializeStafffromFile();   // Load staff from file
@@ -73,7 +71,7 @@ public class AccountManager {
                 String roleString = values[2];
                 String gender = values[3];
                 int age = Integer.parseInt(values[4]);
-                String password = values[5];
+                //String password = values[5]; Removed cause password is not stored in the file
     
                 Role role;
                 try {
@@ -100,7 +98,7 @@ public class AccountManager {
     
                 // Set the password and add the staff member to the users list
                 if (staffMember != null) {
-                    staffMember.setNewPassword(password);  // Set password using the method in User class
+                    staffMember.setNewPassword("password");  // Set password using the method in User class
                     users.add(staffMember);  // Adds the staff member to the users ArrayList
                 }
             }
@@ -112,6 +110,7 @@ public class AccountManager {
         }
     }
     
+    /*
     public void start() {
         boolean exit = false;
 
@@ -142,10 +141,10 @@ public class AccountManager {
         }
         sc.close();
     }
-
+	*/
     
     //REGISTRATION METHOD
-    private void register() {
+    public void register(Scanner sc) {
         System.out.print("Enter ID for new account: ");
         String id = sc.nextLine();
         
@@ -213,7 +212,7 @@ public class AccountManager {
     }
 
     // LOGIN METHOD
-    private User login() {
+    public User login(Scanner sc) {
         System.out.print("Enter ID: ");
         String id = sc.nextLine();
 
@@ -254,10 +253,5 @@ public class AccountManager {
             }
         }
         return null; // User not found
-    }
-
-    public static void main(String[] args) {
-        AccountManager app = new AccountManager();
-        app.start(); // Starts the interactive menu
     }
 }

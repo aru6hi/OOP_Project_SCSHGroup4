@@ -3,7 +3,9 @@ public enum Status {
 	CONFIRMED,
 	CANCELLED,
 	PENDING,
-	OPEN;
+	OPEN,
+	APPROVED,
+	REJECTED;
 	
 	public String toString() {
 		return this.name();

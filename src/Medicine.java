@@ -9,6 +9,12 @@ public class Medicine {
 		this.alertLimit = alertLimit;
 	}
 	
+	public String toString() {
+		return "[" + this.medName + "," 
+				+ String.valueOf(this.currentStock) + "," 
+				+ String.valueOf(this.alertLimit) + "]";
+	}
+	
 	public String getMedName(){
 		return medName;
 	}

@@ -5,22 +5,15 @@ public class Admin extends User{
 	private int age;
 	
 	public Admin(String ID, String name, String gender, int age) {
-		super(ID, Role.ADMIN);
+		super(ID, Role.ADMINISTRATOR);
 		
 		this.name = name;
 		this.gender = gender;
 		this.age = age;
 	}
 
-	public void injectInventory(InventoryManager inventory){
-  		this.inventory = inventory;
- 	} //we need something like pharmacist.setInventory(inventory); in mainapp
-
-	public void viewInventory(){
-  		inventory.printInventory();
- 	}
-
-	public void approveReplenishment(int reqID){
+	/*
+	public void approveReplenishment(String reqID){
 		InventoryReplenishment req = inventory.approveReq(reqID);
 		System.out.println("Replenishment Request #" + req.getReqID()+" is approved");
 	}
@@ -51,6 +44,7 @@ public class Admin extends User{
 		medicine.updateCurrentStock(newAmount - byAmount); 
 		System.out.println(byAmount + " of "medName + " has been removed");
 	}
+	*/
 	
 	public String getName() {
 		return this.name;

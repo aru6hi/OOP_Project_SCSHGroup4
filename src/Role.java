@@ -1,7 +1,7 @@
 public enum Role {
 	PATIENT,
 	DOCTOR(true),
-	ADMIN(true),
+	ADMINISTRATOR(true),
 	PHARMACIST(true);
 	
 	private final boolean isStaff;
