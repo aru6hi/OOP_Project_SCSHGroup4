@@ -18,7 +18,7 @@ public class AccountManager {
 
     private void initializePatientsfromFile() {
         try {
-            File patientList = new File("Data Files\\Patient_List.xlsx");
+            File patientList = new File("Data Files\\Patient_List.csv");
             Scanner scPatientList = new Scanner(patientList);
             
             // Skip the header (first line)
