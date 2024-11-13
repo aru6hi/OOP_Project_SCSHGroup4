@@ -52,16 +52,18 @@ public class InventoryManager {
 		return req;
 	}
 
-	public void approveReq(String reqID){
+	public InventoryReplenishment approveReq(String reqID){
 		for (InventoryReplenishment req : reqs){
 			if (req.getReqID().equals(reqID) && req.getReqStatus() == Status.PENDING){
 				Medicine medicine = getMedicine(req.getMedicineName());
 				if (medicine != null){
 					medicine.updateCurrentStock(req.getReqAmount());
 					req.requestApprove();
+					return req;
 				}
 			}
 		}
+		return null;
 	}
 	
 	public void printLowStockMeds(){
