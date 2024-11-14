@@ -109,6 +109,17 @@ public class AccountManager {
             System.out.println("Staff list file not found!");
         }
     }
+    public void removeStaff(String id, Role role) {
+        // Search for the staff member by ID and role
+        for (User user : users) {
+            // Check if the user has the specified role and ID
+            if (user.getId().equals(id) && user.isRole(role) && (role == Role.DOCTOR || role == Role.PHARMACIST)) {
+                users.remove(user); // Remove the staff member from the list
+                System.out.println(role + " with ID " + id + " has been removed successfully.");
+            }
+        }
+        System.out.println("Staff member with ID " + id + " and role " + role + " not found.");
+    }
     
     /*
     public void start() {
