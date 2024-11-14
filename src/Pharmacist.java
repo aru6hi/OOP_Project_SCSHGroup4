@@ -40,11 +40,14 @@ public class Pharmacist extends User{
  	}
 
  	public void updatePrescriptionStatus(Scanner sc, ApptOutcomeMgr apptoutcomemgr){
-  		//To be added;
 		System.out.println("Enter Appointment ID:");
 		selectedApptID = sc.next();
 		selectedAppt = apptoutcomemgr.findByApptID(selectedApptID);
-		apptoutcomemgr.confirmAppt(selectedAppt);
+		for (PrescribedMedicine med : Prescription ) { 
+			dosageToSubtract = med.getDosage();
+			med.updateCurrentStock(med.getCurrentStock() + dosageToSubtract); 
+		}
+		apptoutcomemgr.completeApptOutRecord(selectedAppt);
 		System.out.println("Prescription Status for " + selectedApptID + "has been updated to COMPLETED.");
 		return;
  	}
