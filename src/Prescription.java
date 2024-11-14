@@ -23,6 +23,10 @@ public class Prescription {
 	public void viewAll() {
 		System.out.println(prescriptionList);
 	}
+
+	public ArrayList<PrescribedMedicine> getPRescriptionList() {
+		return this.prescriptionList;
+	}
 	
 	public void removePrescription(int index) {
 		prescriptionList.remove(index);
