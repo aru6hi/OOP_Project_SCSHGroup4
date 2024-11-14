@@ -1,7 +1,4 @@
 import java.util.Scanner;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.ArrayList;
 
 public class HMSApp {
 	
@@ -29,13 +26,16 @@ public class HMSApp {
 			hms.startPatientMenu(p, sc, apptMgr, apptOutMgr, medRecMgr);
 			break;
 		case Role.DOCTOR:
-			hms.startDoctorMenu(sc);
+			Doctor d=(Doctor) hms.getActiveUser();
+			hms.startDoctorMenu(d,sc,apptMgr,apptOutMgr,medRecMgr);
 			break;
 		case Role.PHARMACIST:
-			hms.startPharmacistMenu(sc);
+			Pharmacist ph=(Pharmacist) hms.getActiveUser();
+			hms.startPharmacistMenu(ph,sc,apptOutMgr,inventory);
 			break;
 		case Role.ADMINISTRATOR:
-			hms.startAdminMenu(sc);
+			Admin a=(Admin) hms.getActiveUser();
+			hms.startAdminMenu(a,sc,inventory);
 			break;
 		default:
 			System.out.println("Unknown Role");
@@ -138,7 +138,7 @@ public class HMSApp {
 		} while (option < 10 && option > 0);
 	}
 	
-	public void startDoctorMenu(Scanner sc) {
+	public void startDoctorMenu(Doctor d, Scanner sc, ApptMgr apptMgr, ApptOutcomeMgr apptOutMgr, MedicalRecordMgr medRecMgr) {
 		int option;
 		do {
 			System.out.println("1. View Patient Medical Records");
@@ -156,18 +156,25 @@ public class HMSApp {
             
             switch (option) {
             case 1:
+				d.getPatientHistory(sc, medRecMgr);
             	break;
             case 2:
+				d.updateMedicalRecord(sc,medRecMgr);
             	break;
             case 3:
+				d.viewPersonalAppts(sc,apptMgr);
             	break;
             case 4:
+				d.scheduleOpenAppt(sc,apptMgr);
             	break;
             case 5:
+				d.confirmOrCancelPendingAppt(sc,apptMgr);
             	break;
             case 6:
+				d.viewUpcomingAppts(sc,apptMgr);
             	break;
             case 7:
+				d.completeAppt(sc,apptMgr,apptOutMgr);
             	break;
             case 8:
             	break;
@@ -176,7 +183,7 @@ public class HMSApp {
 		} while (option < 9 && option > 0);
 	}
 	
-	public void startPharmacistMenu(Scanner sc) {
+	public void startPharmacistMenu(Pharmacist ph, Scanner sc, ApptOutcomeMgr apptOutMgr, InventoryManager inventory) {
 		int option;
 		do {
 			System.out.println("1. View Appointment Outcome Record");
@@ -206,7 +213,7 @@ public class HMSApp {
 		} while (option < 6 && option > 0);
 	}
 	
-	public void startAdminMenu(Scanner sc) {
+	public void startAdminMenu(Admin a, Scanner sc, InventoryManager inventory) {
 		int option;
 		do {
 			System.out.println("1. View and Manage Hospital Staff");
