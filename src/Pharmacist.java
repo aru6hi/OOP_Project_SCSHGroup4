@@ -20,14 +20,31 @@ public class Pharmacist extends User{
   		inventory.printInventory();
  	}
 
-	public InventoryReplenishment createRequest(String medName, int reqAmount){
+	public InventoryReplenishment createRequest(Scanner sc, InventoryManager inventory){
+		System.out.println("Which medicine would you like to replenish?");
+		String medName = sc.next();
+
+		if (inventory.getMedicine == null){
+			System.out.println("Invalid input. Exiting replenishment request...")
+			return null;
+		}
+		
+		System.out.println("Input replenishment amount:");
+		int reqAmount = sc.nextInt();
+
   		InventoryReplenishment req = inventory.newRequest(medName,reqAmount);
   		System.out.println("Request for " + reqAmount + " of " + medName + "has been created");
   		return req;
  	}
 
- 	public void updatePrescriptionStatus(){
+ 	public void updatePrescriptionStatus(Scanner sc, ApptOutcomeMgr apptoutcomemgr){
   		//To be added;
+		System.out.println("Enter Appointment ID:");
+		selectedApptID = sc.next();
+		selectedAppt = apptoutcomemgr.findByApptID(selectedApptID);
+		apptoutcomemgr.confirmAppt(selectedAppt);
+		System.out.println("Prescription Status for " + selectedApptID + "has been updated to COMPLETED.");
+		return;
  	}
 
 	public String getName() {

@@ -198,12 +198,16 @@ public class HMSApp {
             
             switch (option) {
             case 1:
+				apptOutMgr.viewAll();
             	break;
             case 2:
+				ph.updatePrescriptionStatus(sc, apptOutMgr)
             	break;
             case 3:
+				ph.viewInventory();
             	break;
             case 4:
+				ph.createRequest(sc, inventory);
             	break;
             case 5:
             	break;
