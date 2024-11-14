@@ -13,6 +13,39 @@ public class Admin extends User{
 		this.age = age;
 	}
 
+	public void adminInventoryMenu(Scanner sc){
+		int menuOption;
+		do {
+			System.out.println("View and Manage Medication Inventory");
+			System.out.println("1. Add medication stock");
+			System.out.println("2. Deduct medication stock");
+			System.out.println("3. Set medication stock");
+			System.out.println("4. Set medication alert level");
+			System.out.println("5. Back to Menu")
+
+			System.out.print("Enter your choice: ");
+            menuOption = sc.nextInt();
+            sc.nextLine(); 
+            
+            switch (menuOption) {
+            case 1:
+				addStockAdmin(sc, inventory);
+            	break;
+            case 2:
+				removeStockAdmin(sc, inventory);
+            	break;
+            case 3:
+				updateStockAdmin(sc, inventory);
+            	break;
+            case 4:
+				updateAlertAdmin(sc, inventory);
+            	break;
+            case 5:
+            	break;
+            	}
+			} while (menuOption < 6 && menuOption > 0);
+	}
+
 	
 	public void approveReplenishment(Scanner sc, InventoryManager inventory){
 		System.out.println("Enter Request ID:");
@@ -72,6 +105,35 @@ public class Admin extends User{
 
 		medicine.updateCurrentStock(medicine.getCurrentStock() - byAmount); 
 		System.out.println(byAmount + " of " + medName + " has been removed");
+	}
+
+	public void adminStaffMenu(Scanner sc, AccountManager acctMgr){
+		int menuOption;
+		do {
+			System.out.println("View and Manage Hospital Staff");
+			System.out.println("1. Add staff");
+			System.out.println("2. Remove staff");
+			System.out.println("3. Update staff");
+			System.out.println("4. Back to Menu")
+
+			System.out.print("Enter your choice: ");
+            menuOption = sc.nextInt();
+            sc.nextLine(); 
+            
+            switch (menuOption) {
+            case 1:
+				addstaff(sc, inventory);
+            	break;
+            case 2:
+				removestaff(sc, inventory);
+            	break;
+            case 3:
+				updatestaff(sc, inventory);
+            	break;
+            case 4:
+            	break;
+            	}
+			} while (menuOption < 5 && menuOption > 0);
 	}
 
 	public void removestaff(Scanner sc, AccountManager account){

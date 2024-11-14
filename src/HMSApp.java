@@ -217,7 +217,7 @@ public class HMSApp {
 		} while (option < 6 && option > 0);
 	}
 	
-	public void startAdminMenu(Admin a, Scanner sc, InventoryManager inventory) {
+	public void startAdminMenu(Admin a, Scanner sc, InventoryManager inventory, AccountManager acctMgr) {
 		int option;
 		do {
 			System.out.println("1. View and Manage Hospital Staff");
@@ -232,12 +232,15 @@ public class HMSApp {
             
             switch (option) {
             case 1:
+				adminStaffMenu(sc, acctMgr)
             	break;
             case 2:
             	break;
             case 3:
+				adminInventoryMenu(sc, inventory);
             	break;
             case 4:
+				approveReplenishment(sc, inventory);
             	break;
             case 5:
             	break;
