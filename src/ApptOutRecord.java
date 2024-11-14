@@ -50,6 +50,10 @@ public class ApptOutRecord {
 	public void addPrescription(String name, String dosage) {
 		prescription.addPrescription(name, dosage);
 	}
+
+	public Prescription getPrescription() {
+		return this.prescription;
+	}
 	
 	public Status getStatus() {
 		return this.status;
