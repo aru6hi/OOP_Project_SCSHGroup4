@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class Pharmacist extends User{
 	private String name;
 	private String gender;
