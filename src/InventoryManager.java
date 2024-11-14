@@ -82,5 +82,14 @@ public class InventoryManager {
   		}
  	}
 
+	public InventoryReplenishment findByReqID(String reqID) {
+		for (InventoryReplenishment req : reqs) {
+			if (req.getReqID().equals(reqID)) {
+				return req;
+			}
+		}
+		throw new RuntimeException("No such Request ID");
+	}
+
 }	
 
