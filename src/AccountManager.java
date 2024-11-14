@@ -115,11 +115,10 @@ public class AccountManager {
             // Check if the user has the specified role and ID
             if (user.getId().equals(id) && user.isRole(role) && (role == Role.DOCTOR || role == Role.PHARMACIST)) {
                 users.remove(user); // Remove the staff member from the list
-                System.out.println(role + " with ID " + id + " has been removed successfully.");
             }
         }
-        System.out.println("Staff member with ID " + id + " and role " + role + " not found.");
     }
+
     
     /*
     public void start() {
@@ -257,7 +256,7 @@ public class AccountManager {
         }
     }
 
-    private User findUser(String id, Role role) {
+    public User findUser(String id, Role role) {
         for (User user : users) { // Iterate over each user in the ArrayList
             if (user.getId().equals(id) && user.isRole(role)) {
                 return user; // Return the user if ID and role match
