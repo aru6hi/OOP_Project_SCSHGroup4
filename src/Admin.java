@@ -14,7 +14,7 @@ public class Admin extends User{
 		this.age = age;
 	}
 
-	public void adminInventoryMenu(Scanner sc){
+	public void adminInventoryMenu(Admin a, Scanner sc, HMSApp hms, AccountManager acctMgr, InventoryManager inventory){
 		int menuOption;
 		do {
 			System.out.println("View and Manage Medication Inventory");
@@ -42,6 +42,7 @@ public class Admin extends User{
 				updateAlertAdmin(sc, inventory);
             	break;
             case 5:
+			    hms.startAdminMenu(a,sc, inventory,hms,acctMgr);
             	break;
             	}
 			} while (menuOption < 6 && menuOption > 0);
@@ -108,7 +109,7 @@ public class Admin extends User{
 		System.out.println(byAmount + " of " + medName + " has been removed");
 	}
 
-	public void adminStaffMenu(Scanner sc, AccountManager acctMgr){
+	public void adminStaffMenu(Admin a, Scanner sc, AccountManager acctMgr, HMSApp hms,InventoryManager inventory){
 		int menuOption;
 		do {
 			System.out.println("View and Manage Hospital Staff");
@@ -136,6 +137,7 @@ public class Admin extends User{
 			    viewstaff(acctMgr);
             	break;
 			case 5:
+			    hms.startAdminMenu(a,sc, inventory,hms,acctMgr);
 				break;
 			}
 			} while (menuOption < 6 && menuOption > 0);
