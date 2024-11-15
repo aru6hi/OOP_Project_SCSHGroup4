@@ -237,7 +237,7 @@ public class HMSApp {
             case 2:
             	break;
             case 3:
-				a.adminInventoryMenu(sc, inventory);
+				a.adminInventoryMenu(a,sc,hms,acctMgr,inventory);
             	break;
             case 4:
 				a.approveReplenishment(sc, inventory);
