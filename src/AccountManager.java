@@ -13,7 +13,6 @@ public class AccountManager {
         initializeStafffromFile();   // Load staff from file
     }
 
-
     private void initializePatientsfromFile() {
         try {
             File patientList = new File("Data Files\\Patient_List.csv");

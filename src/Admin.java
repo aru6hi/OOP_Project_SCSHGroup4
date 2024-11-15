@@ -160,6 +160,13 @@ public class Admin extends User{
 		int age = sc.nextInt();
 		Role role;
 		User user=account.findUser(id, role);
+
+		if (user!=null){
+			setAge(age);
+			System.out.println("Staff Member's age updated successfully.");
+		} else{
+			System.out.println("Staff Member not found or role mismatch.");
+		}
 	}
 
 	public void addstaff(Scanner sc, AccountManager account){
@@ -209,7 +216,7 @@ public class Admin extends User{
         // Set the password using the User class's method
         if (newStaff != null) {
 			newStaff.setNewPassword(password);
-			account.getUsers().add(newStaff);  // Add the new staff member to AccountManager's users list
+			account.users.add(newStaff);  // Add the new staff member to AccountManager's users list
 			System.out.println(role + " account created successfully for " + name);
         }
 	}
