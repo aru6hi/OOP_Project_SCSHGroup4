@@ -232,7 +232,7 @@ public class HMSApp {
             
             switch (option) {
             case 1:
-				adminStaffMenu(sc, acctMgr)
+				adminStaffMenu(sc, acctMgr);
             	break;
             case 2:
             	break;
