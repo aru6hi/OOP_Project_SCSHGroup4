@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.
 
 public class Admin extends User{
 	private String name;
@@ -114,7 +115,8 @@ public class Admin extends User{
 			System.out.println("1. Add staff");
 			System.out.println("2. Remove staff");
 			System.out.println("3. Update staff");
-			System.out.println("4. Back to Menu")
+			System.out.println("4. View Staff List");
+			System.out.println("5. Back to Menu");
 
 			System.out.print("Enter your choice: ");
             menuOption = sc.nextInt();
@@ -122,18 +124,21 @@ public class Admin extends User{
             
             switch (menuOption) {
             case 1:
-				addstaff(sc, inventory);
+				addstaff(sc, acctMgr);
             	break;
             case 2:
-				removestaff(sc, inventory);
+				removestaff(sc, acctMgr);
             	break;
             case 3:
-				updatestaff(sc, inventory);
+				updatestaff(sc, acctMgr);
             	break;
             case 4:
+			    viewstaff(acctMgr);
             	break;
-            	}
-			} while (menuOption < 5 && menuOption > 0);
+			case 5:
+				break;
+			}
+			} while (menuOption < 6 && menuOption > 0);
 	}
 
 	public void removestaff(Scanner sc, AccountManager account){
@@ -210,8 +215,25 @@ public class Admin extends User{
 	}
 
 	public void viewstaff(AccountManager account){
-		System.out.println("Staff List:");
-	}
+		System.out.println("Hospital Staff List:");
+        System.out.println("--------------------------------------------------");
+        System.out.printf("%-20s %-20s %-20s\n", "Username", "Role", "Other Details");
+        System.out.println("--------------------------------------------------");
+
+        for (User user : account.users) { // Assuming 'users' is the array of User objects in AccountManager
+            if (user != null) { 
+                Role role = getRole(); 
+                if (role.isStaff()){
+                    System.out.printf("%-20s %-20s %-20s\n",
+					"Role:"+ role,
+					"Gender: " + getGender(), 
+                    "Age: " + getAge() 
+				);
+            }
+        }
+    }
+    System.out.println("--------------------------------------------------");
+}
 	
 	
 	public String getName() {

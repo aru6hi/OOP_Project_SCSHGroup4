@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class AccountManager {
 
-    private ArrayList<User> users; // Array to hold different User types
+    public ArrayList<User> users; // Array to hold different User types
 
     public AccountManager() {
         users = new ArrayList<>();
