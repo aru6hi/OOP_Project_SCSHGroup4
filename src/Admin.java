@@ -22,7 +22,7 @@ public class Admin extends User{
 			System.out.println("2. Deduct medication stock");
 			System.out.println("3. Set medication stock");
 			System.out.println("4. Set medication alert level");
-			System.out.println("5. Back to Menu")
+			System.out.println("5. Back to Menu");
 
 			System.out.print("Enter your choice: ");
             menuOption = sc.nextInt();
