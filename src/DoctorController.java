@@ -1,14 +1,25 @@
 import java.util.Scanner;
 import java.util.ArrayList;
 
+/**
+ * Controller unit for Doctor functions
+ */
 public class DoctorController implements Controller{
 	private Scanner sc;
 	private ApptDB apptDB;
 	private ApptOutDB apptOutDB;
-	private MedicalRecordDB medRecDB;
+	private PatientRecordDB medRecDB;
 	private CurrentSession session;
 	
-	public DoctorController(Scanner sc, ApptDB apptDB, ApptOutDB apptOutDB, MedicalRecordDB medRecDB, CurrentSession session) {
+	/**
+	 * Creates a new Doctor Controller
+	 * @param sc scanner for input
+	 * @param apptDB appointment database
+	 * @param apptOutDB appointment outcome record database
+	 * @param medRecDB patient record database
+	 * @param session current session
+	 */
+	public DoctorController(Scanner sc, ApptDB apptDB, ApptOutDB apptOutDB, PatientRecordDB medRecDB, CurrentSession session) {
 		this.sc = sc;
 		this.apptDB = apptDB;
 		this.apptOutDB = apptOutDB;
@@ -16,6 +27,9 @@ public class DoctorController implements Controller{
 		this.session = session;
 	}
 	
+	/**
+	 * {@inheritDoc}
+	 */
 	public void choose(int option) {
 		switch (option) {
         case 1:
@@ -45,10 +59,13 @@ public class DoctorController implements Controller{
         }
 	}
 	
+	/**
+	 * Prints patient record of specific patient ID
+	 */
 	public void viewPatientMedicalRecord(){
 		System.out.println("Enter Patient ID: ");
 		String patientID = sc.nextLine();
-		ArrayList<MedicalRecord> a = FindBy.id(medRecDB.getDB(), patientID);
+		ArrayList<PatientRecord> a = FindBy.id(medRecDB.getDB(), patientID);
 		if (a.isEmpty()) {
 			System.out.println("No Records Found!");
 		}
@@ -57,16 +74,19 @@ public class DoctorController implements Controller{
 		}
 	}
 	
+	/**
+	 * Updates medical record of patient with specific patient ID
+	 */
 	public void updatePatientMedicalRecord() {
 		System.out.println("Enter patient ID to update the record: ");
 		String patientID=sc.nextLine();
-		ArrayList<MedicalRecord> a = FindBy.id(medRecDB.getDB(), patientID);
+		ArrayList<PatientRecord> a = FindBy.id(medRecDB.getDB(), patientID);
 		if (a.isEmpty()) {
 			System.out.println("No Records Found!");
 		}
 		else {
 			//Edit Record
-			MedicalRecord record = a.get(0);
+			PatientRecord record = a.get(0);
 			System.out.println("Choose one of the following: ");
 	        System.out.println("1. Edit Patient Diagnoses");
 	        System.out.println("2. Edit Patient Medications");
@@ -125,12 +145,18 @@ public class DoctorController implements Controller{
 		}
 	}
 	
+	/**
+	 * View appointments with doctorID matching the logged in doctor
+	 */
 	public void viewPersonalAppts() {
 		ArrayList<Appointment> myAppts = FindBy.apptDoctorID(apptDB.getDB(), session.getActiveUser().getID());
 		System.out.println("Your Schedule:");
 		System.out.println(myAppts);
 	}
 	
+	/**
+	 * Schedule an open appointment
+	 */
 	public void scheduleOpenAppt() {
 		//patientID will be null until patient shows up to book it, then the id gets added
 		
@@ -160,9 +186,13 @@ public class DoctorController implements Controller{
 		System.out.println(String.format("Open Slot @ %d-%d-%d %d:%d Scheduled!", year, month, day, hour, minute));
 	}
 	
+	/**
+	 * See all pending appointments and either confirm or cancel by appointment id
+	 */
 	public void confirmOrCancelPendingAppt() {
 		//This let's them see appointments so they can either confirm or decline
 		ArrayList<Appointment> pendingAppts = FindBy.status(apptDB.getDB(), Status.PENDING);
+		pendingAppts = FindBy.apptDoctorID(pendingAppts, session.getActiveUser().getID());
 		
 		System.out.println("Appointments pending confirmation:");
 		System.out.println(pendingAppts);
@@ -209,6 +239,9 @@ public class DoctorController implements Controller{
 		}
 	}
 	
+	/**
+	 * prints all upcoming appointments of logged in doctor
+	 */
 	public void viewUpcomingAppts() {
 		ArrayList<Appointment> myAppts = FindBy.apptDoctorID(apptDB.getDB(), session.getActiveUser().getID());
 		
@@ -220,6 +253,9 @@ public class DoctorController implements Controller{
 		System.out.println(confirmedAppts);
 	}
 	
+	/**
+	 * complete an appointment and generate appropriate appointment outcome record
+	 */
 	public void completeAppt() {
 		String selectedApptID;
 		ArrayList<Appointment> selectedAppt;

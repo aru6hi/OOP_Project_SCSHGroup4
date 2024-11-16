@@ -1,14 +1,25 @@
 import java.util.Scanner;
 import java.util.ArrayList;
 
+/**
+ * Controller unit for Patient functions
+ */
 public class PatientController implements Controller{
 	private Scanner sc;
 	private ApptDB apptDB;
 	private ApptOutDB apptOutDB;
-	private MedicalRecordDB medRecDB;
+	private PatientRecordDB medRecDB;
 	private CurrentSession session;
-
-	public PatientController(Scanner sc, ApptDB apptDB, ApptOutDB apptOutDB, MedicalRecordDB medRecDB, CurrentSession session) {
+	
+	/**
+	 * Creates a new PatientController
+	 * @param sc Scanner for input
+	 * @param apptDB appointment database to work on
+	 * @param apptOutDB appointment outcome database to work on
+	 * @param medRecDB medical record database to work on
+	 * @param session Current active session
+	 */
+	public PatientController(Scanner sc, ApptDB apptDB, ApptOutDB apptOutDB, PatientRecordDB medRecDB, CurrentSession session) {
 		this.sc = sc;
 		this.apptDB = apptDB;
 		this.apptOutDB = apptOutDB;
@@ -16,6 +27,9 @@ public class PatientController implements Controller{
 		this.session = session;
 	}
 	
+	/**
+	 * {@inheritDoc}
+	 */
 	public void choose(int option) {
 		switch (option) {
         case 1:
@@ -47,8 +61,8 @@ public class PatientController implements Controller{
         }
 	}
 	
-	private MedicalRecord findMyRecord() {
-		ArrayList<MedicalRecord> a = new ArrayList<>();
+	private PatientRecord findMyRecord() {
+		ArrayList<PatientRecord> a = new ArrayList<>();
 		a = FindBy.id(medRecDB.getDB(), session.getActiveUser().getID());
 		
 		if (a.isEmpty()) {
@@ -58,13 +72,18 @@ public class PatientController implements Controller{
 		return a.get(0);
 	}
 	
+	/**
+	 * View personal medical record
+	 */
 	public void viewMedicalRecord() {
 		System.out.println(findMyRecord());
 	}
 	
+	/**
+	 * Update personal info
+	 */
 	public void updatePersonalInfo() {
-		
-		MedicalRecord myRec = findMyRecord();
+		PatientRecord myRec = findMyRecord();
 		viewMedicalRecord();
 		
 		System.out.println("What would you like to update?");
@@ -84,6 +103,10 @@ public class PatientController implements Controller{
 		}
 	}
 	
+	/**
+	 * View open appointments
+	 * @return ArrayList of all open appointments
+	 */
 	public ArrayList<Appointment> viewAvailableAppt() {
 		ArrayList<Appointment> a = new ArrayList<>();
 		a = FindBy.status(apptDB.getDB(), Status.OPEN);
@@ -94,6 +117,9 @@ public class PatientController implements Controller{
 		return a;
 	}
 	
+	/**
+	 * Book an open appointment
+	 */
 	public void bookAppt() {
 		
 		ArrayList<Appointment> a = new ArrayList<>();
@@ -118,6 +144,10 @@ public class PatientController implements Controller{
 		}
 	}
 	
+	/**
+	 * view booked appointments
+	 * @return ArrayList containing personal booked appointments
+	 */
 	public ArrayList<Appointment> viewScheduledAppt() {
 		ArrayList<Appointment> a = new ArrayList<>();
 		a = FindBy.apptPatientID(apptDB.getDB(), session.getActiveUser().getID());
@@ -128,6 +158,9 @@ public class PatientController implements Controller{
 		return a;
 	}
 	
+	/**
+	 * Cancel an appointment
+	 */
 	public void cancelAppt() {
 		ArrayList<Appointment> a = new ArrayList<>();
 		a = viewScheduledAppt();
@@ -149,6 +182,9 @@ public class PatientController implements Controller{
 		}
 	}
 	
+	/**
+	 * Reschedule an appointment
+	 */
 	public void rescheduleAppt() {
 		//Cancel Old
 		cancelAppt();
@@ -157,6 +193,9 @@ public class PatientController implements Controller{
 		bookAppt();
 	}
 	
+	/**
+	 * view past appointment outcome records
+	 */
 	public void viewPastApptOutRecord() {
 		ArrayList<Appointment> myAppts = FindBy.apptPatientID(apptDB.getDB(), session.getActiveUser().getID());
 		

@@ -1,3 +1,6 @@
+/**
+ * Role enum representing all possible roles accounts can have
+ */
 public enum Role {
 	PATIENT("Patient", "P"),
 	DOCTOR("Doctor", "D"),
@@ -17,6 +20,10 @@ public enum Role {
 		return this.name;
 	}
 	
+	/**
+	 * gets the prefix associated with the Role
+	 * @return prefix of the role
+	 */
 	public String getPrefix() {
 		return this.prefix;
 	}
