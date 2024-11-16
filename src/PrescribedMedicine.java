@@ -1,12 +1,22 @@
 public class PrescribedMedicine {
+	private String medicineID;
 	private String medicineName;
-	private String dosage;
+	private int dosage;
 	
-	public PrescribedMedicine(String name, String dosage) {
+	public PrescribedMedicine(String medicineID, String name, int dosage) {
+		this.medicineID = medicineID; //Should match a stocked medicine
 		this.medicineName = name;
 		this.dosage = dosage;
 	}
 	
+	public String getMedicineID() {
+		return medicineID;
+	}
+
+	public void setMedicineID(String medicineID) {
+		this.medicineID = medicineID;
+	}
+
 	public String toString() {
 		return "(" + this.medicineName + " " + this.dosage + ")";
 	}
@@ -19,11 +29,11 @@ public class PrescribedMedicine {
 		this.medicineName = name;
 	}
 	
-	public String getDosage() {
+	public int getDosage() {
 		return this.dosage;
 	}
 	
-	public void setDosage(String dosage) {
+	public void setDosage(int dosage) {
 		this.dosage = dosage;
 	}
 }

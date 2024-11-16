@@ -1,23 +1,23 @@
 public enum Role {
-	PATIENT,
-	DOCTOR(true),
-	ADMINISTRATOR(true),
-	PHARMACIST(true);
+	PATIENT("Patient", "P"),
+	DOCTOR("Doctor", "D"),
+	ADMINISTRATOR("Administrator", "A"),
+	PHARMACIST("Pharmacist", "P"),
+	STAFF("Staff", "S");
 	
-	private final boolean isStaff;
+	private final String name;
+	private final String prefix;
 	
-	private Role(boolean isStaff) {
-		this.isStaff = isStaff;
+	private Role(String name, String prefix) {
+		this.name = name;
+		this.prefix = prefix;
 	}
 	
-	//This overload ensures default is false
-	//also makes it really easy to initialize
-	private Role() {
-		this.isStaff = false;
+	public String toString() {
+		return this.name;
 	}
 	
-	//This will be useful later to find all staff
-	public boolean isStaff() {
-		return this.isStaff;
+	public String getPrefix() {
+		return this.prefix;
 	}
 }

@@ -20,4 +20,17 @@ public final class SecurityTools {
 	        
 	        return out;
 	}
+	
+	public static boolean authenticatePassword(Account userToAuthenticate, String inputPassword) {
+		//Pass in the input password
+		//It will encrypt it and compare to encrypted password
+		//A match means the input is the same as the actual password
+		String encPass = SecurityTools.encryptPassword(inputPassword);
+		String storedPass = userToAuthenticate.getEncPassword();
+		
+		if (encPass.equals(storedPass)) {
+			return true;
+		}
+		return false;
+	}
 }

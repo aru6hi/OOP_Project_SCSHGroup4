@@ -1,69 +1,68 @@
-public class ApptOutRecord {
-	//Data from corresponding completed appt
-	private String apptID;
-	private Date date;
+import java.util.ArrayList;
+import java.time.LocalDate;
+
+public class ApptOutRecord extends DatabaseItem{
+	//From Appt
+	private LocalDate date;
 	
+	public LocalDate getDate() {
+		return date;
+	}
+
+	public void setDate(LocalDate date) {
+		this.date = date;
+	}
+	
+	public void setDate(int year, int month, int day) {
+		this.date = LocalDate.of(year, month, day); 
+	}
+
 	//Own data
 	private String service;
 	private Status status = Status.PENDING; //defaults to pending
 	private String notes;
-	private Prescription prescription = new Prescription();
+	private ArrayList<PrescribedMedicine> prescription = new ArrayList<PrescribedMedicine>();
 	
-	public ApptOutRecord(String apptID, Date date, String service) {
-		this.apptID = apptID;
-		this.date = date;
-		this.service = service;
+	public ApptOutRecord(String apptID) {
+		super("AO");
+		this.setID(apptID);
 	}
 	
-	public ApptOutRecord(String apptID, Date date, String service, Status status) {
-		this.apptID = apptID;
-		this.date = date;
-		this.service = service;
-		this.status = status;
-	}
-	
+	@Override
 	public String toString() {
-		//This is overriding the default Object.toString() method
-		//Now you can print this class directly and it will be formatted nicely
-		
-		return "Appt ID: " + this.apptID + "\n"
-				+ "Date: " + this.date + "\n"
-				+ "Service: " + this.service.toString() + "\n"
-				+ "Notes:" + this.notes + "\n"
-				+ "Prescription:" + this.prescription + "\n"
-				+ "Status: " + this.status.toString() + "\n";
-				
+		return "ApptOutRecord [id=" + this.getID() + ", service=" + service + ", status=" + status + ", notes=" + notes
+				+ ", prescription=" + prescription + "]";
 	}
-	
-	public void setStatus(Status status) {
-		this.status = status;
+
+	public String getService() {
+		return service;
 	}
-	
+
 	public void setService(String service) {
 		this.service = service;
 	}
-	
-	public void addNotes(String notes) {
-		this.notes = notes;
-	}
-	
-	public void addPrescription(String name, String dosage) {
-		prescription.addPrescription(name, dosage);
-	}
 
-	public Prescription getPrescription() {
-		return this.prescription;
-	}
-	
 	public Status getStatus() {
 		return this.status;
 	}
-	
-	public Date getDate() {
-		return this.date;
+
+	public void setStatus(Status status) {
+		this.status = status;
+	}
+
+	public String getNotes() {
+		return notes;
+	}
+
+	public void setNotes(String notes) {
+		this.notes = notes;
 	}
 	
-	public String getApptID() {
-		return this.apptID;
+	public ArrayList<PrescribedMedicine> getPrescription() {
+		return prescription;
+	}
+
+	public void addPrescription(String medicineID, String name, int dosage) {
+		this.prescription.add(new PrescribedMedicine(medicineID, name, dosage));
 	}
 }

@@ -1,84 +1,107 @@
-import java.util.Scanner;
+import java.time.LocalDate;
+import java.util.ArrayList;
 
-public class MedicalRecord {
-    private static int numOfRecords = 0; 
-    private Patient patient; 
-    private String diagnoses;
-    private Prescription medication;
-    private String pastTreatments;
-
-    // Constructor to initialize fields
-    public MedicalRecord() {
-        this.diagnoses = "EMPTY"; 
-        this.pastTreatments = "EMPTY";
-    }
-
-    // Getters and Setters
-    public void setPatient(Patient patient) {
-        this.patient = patient;
-    }
-
-    public void setDiagnoses(String diagnoses) {
-        this.diagnoses = diagnoses;
-    }
-
-    public void addMedication(Scanner sc){
-        String choice="Y";
-        while(choice.equalsIgnoreCase("Y")){
-            System.out.println("Enter name of medicine: ");
-            String name= sc.nextLine();
-            System.out.println("Enter dosage of this medicine: ");
-            String dosage=sc.nextLine();
-            this.medication.addPrescription(name, dosage);
-            System.out.println("Do you want to add more medicines? (Y/N)");
-            choice=sc.nextLine();
-        }
-    }
-
-    public void removeMedication(Scanner sc){
-        String choice="Y";
-        while(choice.equalsIgnoreCase("Y")){
-            System.out.println("List of current medications: ");
-            this.medication.viewAll();
-            System.out.println("Enter index of the medicine to be removed: ");
-            int index=sc.nextInt();
-            this.medication.removePrescription(index-1);
-            System.out.println("Do you want to remove more medicines? (Y/N)");
-            choice=sc.nextLine();
-        }
-    }
-
-    public void setPastTreatments(String pastTreatments) {
-        this.pastTreatments = pastTreatments;
-    }
-
-    public String getDiagnoses() {
-        return this.diagnoses;
-    }
-
-    public Prescription getMedication() {
-        return this.medication;
-    }
-
-    public String getPastTreatments() {
-        return this.pastTreatments;
-    }
-
-    public Patient getPatient() {
-        return this.patient;
-    }
-
-    public static int getNumOfRecords() {
-        return numOfRecords;
-    }
-
-    public String getPatientID() {
-        return patient.getID();
-    }
-
-    public static void incrementRecords() {
-        numOfRecords++;
-    }
-
+public class MedicalRecord extends DatabaseItem{
+	
+	//Match id to patientID to find correct patient
+	private String name;
+	private LocalDate dob;
+	private String gender;
+	private String bloodType;
+	private String email;
+	
+	private String diagnoses;
+    private ArrayList<PrescribedMedicine> prescription = new ArrayList<PrescribedMedicine>();
+	private String pastTreatments;
+	
+    public MedicalRecord(String patientID) {
+		super("M");
+		this.setID(patientID);
+	}
     
+    @Override
+	public String toString() {
+		return "(" +
+				"patientID: " + this.getID() + "\n" +
+				"name:" + this.name + "\n" +
+				"DOB: " + this.dob + "\n" +
+				"gender: " + this.gender + "\n" +
+				"bloodType: " + this.bloodType + "\n" +
+				"email: " + this.email + "\n" +
+				"diagnoses: " + this.diagnoses + "\n" +
+				"prescription:" + this.prescription + "\n" +
+				"pastTreament:" + this.pastTreatments + 
+				")";
+	}
+    
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public LocalDate getDob() {
+		return dob;
+	}
+
+	public void setDob(int year, int month, int day) {
+		this.dob = LocalDate.of(year, month, day); 
+	}
+
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+
+	public String getBloodType() {
+		return bloodType;
+	}
+
+	public void setBloodType(String bloodType) {
+		this.bloodType = bloodType;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getDiagnoses() {
+		return diagnoses;
+	}
+
+	public void setDiagnoses(String diagnoses) {
+		this.diagnoses = diagnoses;
+	}
+
+	public String getPastTreatments() {
+		return pastTreatments;
+	}
+
+	public void setPastTreatments(String pastTreatments) {
+		this.pastTreatments = pastTreatments;
+	}
+	
+	public ArrayList<PrescribedMedicine> getPrescription() {
+		return prescription;
+	}
+
+	public void addPrescription(String medID, String name, int dosage) {
+		this.prescription.add(new PrescribedMedicine(medID, name, dosage));
+	}
+	
+	public void removePrescription(int index) {
+		this.prescription.remove(index);
+	}
+	
+	
+
 }

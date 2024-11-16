@@ -1,9 +1,10 @@
-public class Medicine {
+public class StockedMedicine extends DatabaseItem{
 	private String medName;
 	private int currentStock;
 	private int alertLimit;
 	
-	public Medicine(String medName, int currentStock, int alertLimit){
+	public StockedMedicine(String medName, int currentStock, int alertLimit){
+		super("M");
 		this.medName = medName;
 		this.currentStock = currentStock;
 		this.alertLimit = alertLimit;
@@ -23,7 +24,7 @@ public class Medicine {
 		return currentStock;
 	}
 	
-	public void updateCurrentStock(int currentStock) {
+	public void setCurrentStock(int currentStock) {
 		this.currentStock = currentStock;
 	}
 	
@@ -35,7 +36,7 @@ public class Medicine {
 		return currentStock < alertLimit;
 	}
 
-	public void updateAlertLimit(int alertLimit){
+	public void setAlertLimit(int alertLimit){
   		this.alertLimit = alertLimit;
  	}
 }

@@ -1,104 +1,74 @@
-public class Appointment {
+import java.time.LocalDate;
+import java.time.LocalTime;
+
+public class Appointment extends DatabaseItem{
 	private String doctorID;
 	private String patientID;
 	
-	private Date date;
-	private String time;
-	
+	private LocalTime time;
+	private LocalDate date;
 	private Status status = Status.OPEN; //Defaults to open
 	
-	private static int currAvailableApptID = 1;
-	private String apptID;
-	
-	public Appointment(String doctorID, String patientID, Date date, String time) {
-		this.apptID = genApptID();
-		this.doctorID = doctorID;
-		this.patientID = patientID;
-		this.date = date;
-		this.time = time;
+	public Appointment() {
+		super("A");
 	}
 	
-	public Appointment(String doctorID, String patientID, Date date, String time, Status status) {
-		this.apptID = genApptID();
-		this.doctorID = doctorID;
-		this.patientID = patientID;
-		this.date = date;
-		this.time = time;
-		this.status = status;
-	}
-	
-	private String genApptID() {
-		//Unique cause it's based off a static counter
-		int maxNumPartLength = 5;
-		String numericPart = String.valueOf(currAvailableApptID);
-		if (numericPart.length() < maxNumPartLength) {
-			int remaining = maxNumPartLength - numericPart.length();
-			
-			//append a bunch of 0s to front
-			for (int i = 0; i < remaining; i++) {
-				numericPart = "0" + numericPart;
-			}
-		}
-		
-		currAvailableApptID++;
-		
-		return "A" + numericPart;
-	}
-	
+	@Override
 	public String toString() {
-		//This is overriding the default Object.toString() method
-		//Now you can print this class directly and it will be formatted nicely
-		
-		return "Appt ID: " + this.apptID + "\n"
-				+ "Doctor ID: " + this.doctorID + "\n" 
-				+ "Patient ID: " + this.patientID + "\n"
-				+ "Date: " + this.date + "\n"
-				+ "Time: " + this.time + "\n"
-				+ "Status: " + this.status.toString() + "\n";
-				
+		return "Appointment ID: " + this.getID() + "\n" +
+				"Doctor ID: " + this.doctorID + "\n" +
+				"Patient ID: " + this.patientID + "\n" +
+				"Date: " + this.date + "\n" +
+				"Time: " + this.time + "\n" +
+				"Status: " + this.status + "\n";
 	}
 	
-	public void setStatus(Status newStatus) {
-		this.status = newStatus;
+	public void setDoctorID(String doctorID) {
+		this.doctorID = doctorID;
+	}
+	
+	public void setPatientID(String patientID) {
+		this.patientID = patientID;
+	}
+	
+	public void setDate(LocalDate date) {
+		this.date = date; 
+	}
+	
+	public void setDate(int year, int month, int day) {
+		this.date = LocalDate.of(year, month, day); 
+	}
+	
+	public void setTime(LocalTime time) {
+		this.time = time; 
+	}
+	
+	public void setTime(int hour, int minute) {
+		this.time = LocalTime.of(hour, minute);
 	}
 	
 	public Status getStatus() {
-		return this.status;
+		return status;
 	}
-	
-	public void setDate(Date newDate) {
-		this.date = newDate;
+
+	public void setStatus(Status status) {
+		this.status = status;
 	}
-	
-	public Date getDate() {
-		return this.date;
-	}
-	
-	public void setTime(String newTime) {
-		this.time = newTime;
-	}
-	
-	public String getTime() {
-		return this.time;
-	}
-	
-	public void setPatientID(String newPatientID) {
-		this.patientID = newPatientID;
-	}
-	
-	public void setDoctorID(String newDoctorID) {
-		this.doctorID = newDoctorID;
-	}
-	
-	public String getPatientID() {
-		return this.patientID;
-	}
-	
+
 	public String getDoctorID() {
-		return this.doctorID;
+		return doctorID;
 	}
-	
-	public String getApptID() {
-		return this.apptID;
+
+	public String getPatientID() {
+		return patientID;
 	}
- }
+
+	public LocalTime getTime() {
+		return time;
+	}
+
+	public LocalDate getDate() {
+		return date;
+	}
+
+}
