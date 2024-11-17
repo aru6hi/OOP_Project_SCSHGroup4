@@ -1,26 +1,46 @@
 import java.util.Scanner;
 import java.util.ArrayList;
 
+/**
+ * Controller unit for login functions
+ */
 public class LoginController implements Controller{
 	private Scanner sc;
 	private AccountDB acctDB;
 	private CurrentSession session;
 	
+	/**
+	 * gets the current session
+	 * @return CurrentSession
+	 */
 	public CurrentSession getSession() {
 		return session;
 	}
-
+	
+	/**
+	 * Sets the current session
+	 * @param session the CurrentSession
+	 */
 	public void setSession(CurrentSession session) {
 		this.session = session;
 	}
-
+	
+	/**
+	 * Creates new LoginController
+	 * @param sc scanner for input
+	 * @param acctDB account database to work on
+	 * @param session current active session
+	 */
 	public LoginController(Scanner sc, AccountDB acctDB, CurrentSession session) {
 		this.sc = sc;
 		this.acctDB = acctDB;
 		this.session = session;
 	}
 	
-	public void choose(int option) {
+	/**
+	 * {@inheritDoc}
+	 */
+	public void runChosenOption(int option) {
 		switch (option) {
         case 1:
         	login();
@@ -31,8 +51,13 @@ public class LoginController implements Controller{
         }
 	}
 	
+	/**
+	 * Authenticate user and set session user to authenticated user
+	 */
 	//On login will update session object with active user
 	public void login() {
+		
+		logout();
 		
 		System.out.print("Enter ID: ");
         String id = sc.nextLine();
@@ -61,9 +86,13 @@ public class LoginController implements Controller{
         }
         
         Account acct = accountsWithIDAndRole.get(0);
-        if (SecurityTools.authenticatePassword(acct, password)) {
+        if (SecurityTools.authenticatePassword(acct.getEncPassword(), password)) {
         	System.out.println("Login Successful!");
         	session.setActiveUser(acct); //MAke my guy the current session user
+        }
+        else {
+        	System.out.println("Wrong Password!");
+        	return;
         }
         
         //change default password on first login
@@ -76,9 +105,11 @@ public class LoginController implements Controller{
         return;
 	}
 	
-	
+	/**
+	 * sets session user to null
+	 */
 	public void logout() {
 		session.setActiveUser(null);
-		System.out.println("Logged Out");
+		System.out.println("Logged Out Current User");
 	}
 }

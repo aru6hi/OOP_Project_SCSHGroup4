@@ -1,14 +1,26 @@
 import java.util.Scanner;
+
+/**
+ * Prints menus for Patient
+ */
 public class PatientView implements View{
 	
 	Scanner sc;
 	PatientController pCon;
 	
+	/**
+	 * Creates a new PatientView object
+	 * @param sc Scanner for taking inputs
+	 * @param pCon Controller that will receive the inputs
+	 */
 	public PatientView(Scanner sc, PatientController pCon) {
 		this.sc = sc;
 		this.pCon = pCon;
 	}
-
+	
+	/**
+	 * {@inheritDoc}
+	 */
 	public void printMenu() {
 		int option;
 		
@@ -32,7 +44,10 @@ public class PatientView implements View{
         
 	}
 	
+	/**
+	 * {@inheritDoc}
+	 */
 	public void chooseOption(int option) {
-		pCon.choose(option);
+		pCon.runChosenOption(option);
 	}
 }

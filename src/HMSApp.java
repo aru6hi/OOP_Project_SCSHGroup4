@@ -1,4 +1,7 @@
 import java.util.Scanner;
+/**
+ * Main program class
+ */
 public class HMSApp {
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
@@ -7,7 +10,7 @@ public class HMSApp {
 		AccountDB acctDB = new AccountDB();
 		ApptDB apptDB = new ApptDB();
 		ApptOutDB apptOutDB = new ApptOutDB();
-		MedicalRecordDB medRecDB = new MedicalRecordDB();
+		PatientRecordDB medRecDB = new PatientRecordDB();
 		StaffRecordDB staffRecDB = new StaffRecordDB();
 		InventoryDB inventoryDB = new InventoryDB();
 		ReplenishmentDB replenishDB = new ReplenishmentDB();

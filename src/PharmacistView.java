@@ -1,14 +1,25 @@
 import java.util.Scanner;
 
+/**
+ * Prints menus for Pharmacist
+ */
 public class PharmacistView implements View{
 	Scanner sc;
 	PharmacistController con;
 	
+	/**
+	 * Creates a new PharmacistView
+	 * @param sc Scanner for input
+	 * @param con controller that will take input
+	 */
 	public PharmacistView(Scanner sc, PharmacistController con) {
 		this.sc = sc;
 		this.con = con;
 	}
 	
+	/**
+	 * {@inheritDoc}
+	 */
 	public void printMenu() {
 		int option;
 		
@@ -29,7 +40,10 @@ public class PharmacistView implements View{
         
 	}
 	
+	/**
+	 * {@inheritDoc}
+	 */
 	public void chooseOption(int option) {
-		con.choose(option);
+		con.runChosenOption(option);
 	}
 }

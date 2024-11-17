@@ -1,14 +1,25 @@
 import java.util.Scanner;
 
+/**
+ * Prints menu for doctor
+ */
 public class DoctorView implements View{
 	Scanner sc;
 	DoctorController dCon;
 	
+	/**
+	 * Creates a new DoctorView object
+	 * @param sc scanner for input
+	 * @param aCon Controller that will receive the inputs
+	 */
 	public DoctorView(Scanner sc, DoctorController dCon) {
 		this.sc = sc;
 		this.dCon = dCon;
 	}
-
+	
+	/**
+	 * {@inheritDoc}
+	 */
 	public void printMenu() {
 		int option;
 		
@@ -31,7 +42,10 @@ public class DoctorView implements View{
         
 	}
 	
+	/**
+	 * {@inheritDoc}
+	 */
 	public void chooseOption(int option) {
-		dCon.choose(option);
+		dCon.runChosenOption(option);
 	}
 }

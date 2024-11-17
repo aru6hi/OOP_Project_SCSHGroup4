@@ -1,14 +1,25 @@
 import java.util.Scanner;
 
+/**
+ * Prints menu for login
+ */
 public class LoginView implements View{
 	Scanner sc;
 	LoginController con;
 	
+	/**
+	 * Creates new LoginView object
+	 * @param sc scanner for input
+	 * @param con controller to receive input
+	 */
 	public LoginView(Scanner sc, LoginController con) {
 		this.sc = sc;
 		this.con = con;
 	}
-
+	
+	/**
+	 * {@inheritDoc}
+	 */
 	public void printMenu() {
 		int option;
 		
@@ -27,7 +38,10 @@ public class LoginView implements View{
         
 	}
 	
+	/**
+	 * {@inheritDoc}
+	 */
 	public void chooseOption(int option) {
-		con.choose(option);
+		con.runChosenOption(option);
 	}
 }

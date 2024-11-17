@@ -1,16 +1,26 @@
 import java.util.Scanner;
 import java.util.ArrayList;
 
+/**
+ * Controller unit for Administrator functions
+ */
 public class AdminController implements Controller{
-	
 	private Scanner sc;
-	
 	private ApptDB apptDB;
 	private InventoryDB inventoryDB;
 	private AccountDB acctDB;
 	private StaffRecordDB staffDB;
 	private ReplenishmentDB replenishDB;
 	
+	/**
+	 * creates a admin controller with access to the databases it needs
+	 * @param sc Scanner for input
+	 * @param apptDB appointment database
+	 * @param inventoryDB inventory database
+	 * @param acctDB account database
+	 * @param replenishDB replenishment request database
+	 * @param staffDB staff records database
+	 */
 	public AdminController(Scanner sc, ApptDB apptDB, InventoryDB inventoryDB, AccountDB acctDB, ReplenishmentDB replenishDB, StaffRecordDB staffDB) {
 		this.sc = sc;
 		this.apptDB = apptDB;
@@ -20,7 +30,10 @@ public class AdminController implements Controller{
 		this.staffDB = staffDB;
 	}
 	
-	public void choose(int option) {
+	/**
+	 * {@inheritDoc}}
+	 */
+	public void runChosenOption(int option) {
 		switch (option) {
         case 1:
         	viewStaff();
@@ -55,11 +68,17 @@ public class AdminController implements Controller{
         }
 	}
 	
+	/**
+	 * prints all staff records
+	 */
 	public void viewStaff() {
 		System.out.println("Hospital Staff List:");
         System.out.println(staffDB.getDB());
 	}
 	
+	/**
+	 * Adds staff account and record
+	 */
 	public void addStaff() {
 		//Need to create account and add record
 		
@@ -108,6 +127,9 @@ public class AdminController implements Controller{
         staffDB.add(staffRec);
 	}
 	
+	/**
+	 * Remove staff account and record
+	 */
 	public void removeStaff() {
 		System.out.println("Enter id of staff member to be removed: ");
 		String id = sc.nextLine();
@@ -130,6 +152,9 @@ public class AdminController implements Controller{
 		System.out.println(id + " has been removed successfully.");
 	}
 	
+	/**
+	 * update staff record
+	 */
 	public void updateStaff() {
 		System.out.println("Enter id of staff member to be updated: ");
 		String id=sc.nextLine();
@@ -148,16 +173,25 @@ public class AdminController implements Controller{
 		}
 	}
 	
+	/**
+	 * prints all appointments
+	 */
 	public void viewAppts() {
 		System.out.println("All Appointments:");
 		System.out.println(apptDB.getDB());
 	}
 	
+	/**
+	 * prints inventory
+	 */
 	public void viewInventory() {
 		System.out.println("Inventory:");
 		System.out.println(inventoryDB.getDB());
 	}
 	
+	/**
+	 * update stock in of medicine in inventory
+	 */
 	public void updateStock() {
 		
 		viewInventory();
@@ -180,6 +214,9 @@ public class AdminController implements Controller{
 		}
 	}
 	
+	/**
+	 * update low level alert of medicine in inventory
+	 */
 	public void updateLowLevelAlert() {
 		
 		viewInventory();
@@ -202,10 +239,16 @@ public class AdminController implements Controller{
 		}
 	}
 	
+	/**
+	 * prints all replenishment requests
+	 */
 	public void viewReplenishment() {
 		System.out.println(replenishDB.getDB());
 	}
 	
+	/**
+	 * approves replenishment requests and update inventory accordingly
+	 */
 	public void approveReplenishment() {
 		viewReplenishment();
 		
@@ -241,6 +284,9 @@ public class AdminController implements Controller{
 		med.setCurrentStock(med.getCurrentStock() + req.getReqAmount());
 	}
 	
+	/**
+	 * view medicine in inventory with stock < alert limit
+	 */
 	public void viewLowStock() {
 		System.out.println(FindBy.belowAlertLevel(inventoryDB.getDB()));
 	}

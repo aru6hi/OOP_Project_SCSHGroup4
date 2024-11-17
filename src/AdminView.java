@@ -1,14 +1,25 @@
 import java.util.Scanner;
 
+/**
+ * Prints menus for admin
+ */
 public class AdminView implements View{
-	Scanner sc;
-	AdminController aCon;
+	private Scanner sc;
+	private AdminController aCon;
 	
+	/**
+	 * Creates a new AdminView object
+	 * @param sc scanner for input
+	 * @param aCon AdminController that will receive the inputs
+	 */
 	public AdminView(Scanner sc, AdminController aCon) {
 		this.sc = sc;
 		this.aCon = aCon;
 	}
 	
+	/**
+	 * {@inheritDoc}
+	 */
 	public void printMenu() {
 		int option;
 		
@@ -34,7 +45,10 @@ public class AdminView implements View{
         
 	}
 	
+	/**
+	 * {@inheritDoc}
+	 */
 	public void chooseOption(int option) {
-		aCon.choose(option);
+		aCon.runChosenOption(option);
 	}
 }

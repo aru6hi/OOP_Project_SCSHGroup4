@@ -2,9 +2,18 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
+/**
+ * Utility class containing methods to parse the csv files we were given
+ */
 public abstract class ParseFile {
 	
-	public static void parseFilePatient(String filepath, AccountDB acctDB, MedicalRecordDB medRecDB) {
+	/**
+	 * parses File to create patient accounts and records
+	 * @param filepath path of file to parse
+	 * @param acctDB account database
+	 * @param medRecDB patient record database
+	 */
+	public static void parseFilePatient(String filepath, AccountDB acctDB, PatientRecordDB medRecDB) {
 		try {
 			File file = new File(filepath);
 			Scanner sc = new Scanner(file);
@@ -36,7 +45,7 @@ public abstract class ParseFile {
                 user.setID(id);
                 user.setRole(Role.PATIENT);
                 
-                MedicalRecord medRec = new MedicalRecord(id);
+                PatientRecord medRec = new PatientRecord(id);
                 medRec.setName(name);
                 medRec.setDob(year, month, day);
                 medRec.setGender(gender);
@@ -55,6 +64,12 @@ public abstract class ParseFile {
         }
 	}
 	
+	/**
+	 * parses File to create staff accounts and records
+	 * @param filepath path of file to parse
+	 * @param acctDB account database
+	 * @param staffRecDB staff record database
+	 */
 	public static void parseFileStaff(String filepath, AccountDB acctDB, StaffRecordDB staffRecDB) {
         try {
             File staffList = new File(filepath);
@@ -104,6 +119,11 @@ public abstract class ParseFile {
         }
     }
 	
+	/**
+	 * parses File to propagate inventory with StockedMedicine
+	 * @param filepath path of file to parse
+	 * @param inventoryDB inventory database
+	 */
 	public static void parseFileMedicine(String filepath, InventoryDB inventoryDB) {
 		try {
 			File file = new File(filepath);
