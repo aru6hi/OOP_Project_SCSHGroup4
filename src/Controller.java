@@ -6,5 +6,5 @@ public interface Controller {
 	 * Given a int choice, run appropriate function
 	 * @param choice choice of user
 	 */
-	public void choose(int choice);
+	public void runChosenOption(int choice);
 }

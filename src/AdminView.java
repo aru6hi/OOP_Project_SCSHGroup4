@@ -49,6 +49,6 @@ public class AdminView implements View{
 	 * {@inheritDoc}
 	 */
 	public void chooseOption(int option) {
-		aCon.choose(option);
+		aCon.runChosenOption(option);
 	}
 }

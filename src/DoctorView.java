@@ -46,6 +46,6 @@ public class DoctorView implements View{
 	 * {@inheritDoc}
 	 */
 	public void chooseOption(int option) {
-		dCon.choose(option);
+		dCon.runChosenOption(option);
 	}
 }

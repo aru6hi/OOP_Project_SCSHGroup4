@@ -30,7 +30,7 @@ public class DoctorController implements Controller{
 	/**
 	 * {@inheritDoc}
 	 */
-	public void choose(int option) {
+	public void runChosenOption(int option) {
 		switch (option) {
         case 1:
         	viewPatientMedicalRecord();

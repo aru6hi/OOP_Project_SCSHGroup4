@@ -48,6 +48,6 @@ public class PatientView implements View{
 	 * {@inheritDoc}
 	 */
 	public void chooseOption(int option) {
-		pCon.choose(option);
+		pCon.runChosenOption(option);
 	}
 }

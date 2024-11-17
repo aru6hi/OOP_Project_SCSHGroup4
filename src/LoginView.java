@@ -42,6 +42,6 @@ public class LoginView implements View{
 	 * {@inheritDoc}
 	 */
 	public void chooseOption(int option) {
-		con.choose(option);
+		con.runChosenOption(option);
 	}
 }
