@@ -10,7 +10,7 @@
 - Kee Yu Kai
 
 
-### To run the code:
+### To run the code -
 1) Clone this repository to your system
 2) Open HMSApp.java
 1) Ensure filepaths for the three parsefile functions in HMSApp.java are actually the paths on your system
