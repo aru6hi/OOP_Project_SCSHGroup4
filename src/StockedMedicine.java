@@ -21,7 +21,8 @@ public class StockedMedicine extends DatabaseItem{
 	
 	@Override
 	public String toString() {
-		return "[" + this.medName + "," 
+		return "[" + this.getID() + ","
+				+ this.medName + "," 
 				+ String.valueOf(this.currentStock) + "," 
 				+ String.valueOf(this.alertLimit) + "]";
 	}

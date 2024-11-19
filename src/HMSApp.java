@@ -22,7 +22,7 @@ public class HMSApp {
 		
 		//All the Controllers
 		PatientController pCon = new PatientController(sc, apptDB, apptOutDB, medRecDB, session);
-		DoctorController dCon = new DoctorController(sc, apptDB, apptOutDB, medRecDB, session);
+		DoctorController dCon = new DoctorController(sc, apptDB, apptOutDB, medRecDB, inventoryDB, session);
 		AdminController aCon = new AdminController(sc, apptDB, inventoryDB, acctDB, replenishDB, staffRecDB);
 		PharmacistController phCon = new PharmacistController(sc, replenishDB, inventoryDB, apptOutDB);
 		LoginController lCon = new LoginController(sc, acctDB, session);
@@ -43,6 +43,13 @@ public class HMSApp {
 		
 		//System control flag
 		boolean keepGoing = true;
+		
+		//Test Case code
+		ApptOutRecord a = new ApptOutRecord("A0018");
+		a.setStatus(Status.COMPLETED);
+		a.addPrescription("M001", "Panadol", 5);
+		
+		apptOutDB.add(a);
 		
 		//Start System
 		do {

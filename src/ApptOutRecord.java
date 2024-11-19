@@ -37,7 +37,7 @@ public class ApptOutRecord extends DatabaseItem{
 	private String service;
 	private Status status = Status.PENDING; //defaults to pending
 	private String notes;
-	private ArrayList<PrescribedMedicine> prescription = new ArrayList<PrescribedMedicine>();
+	private ArrayList<PrescribedMedicine> prescription;
 	
 	/**
 	 * Creates an Appointment Outcome Record with the given ID
@@ -46,6 +46,7 @@ public class ApptOutRecord extends DatabaseItem{
 	public ApptOutRecord(String apptID) {
 		super("AO");
 		this.setID(apptID);
+		this.prescription  = new ArrayList<PrescribedMedicine>();
 	}
 	
 	@Override
@@ -107,7 +108,7 @@ public class ApptOutRecord extends DatabaseItem{
 	 * @return ArrayList of PrescribedMedicine representing all the medicine prescribed
 	 */
 	public ArrayList<PrescribedMedicine> getPrescription() {
-		return prescription;
+		return this.prescription;
 	}
 	
 	/**

@@ -67,6 +67,7 @@ public class PharmacistController implements Controller{
 	public void completePrescriptionStatus(){
 		System.out.println("Enter Appointment Outcome Record ID:");
 		String selectedApptID = sc.next();
+		sc.nextLine();
 		
 		ArrayList<ApptOutRecord> a = FindBy.id(apptOutDB.getDB(), selectedApptID);
 
@@ -78,6 +79,8 @@ public class PharmacistController implements Controller{
 		//Complete the record
 		ApptOutRecord rec = a.get(0);
 		rec.setStatus(Status.COMPLETED);
+		
+		//System.out.println(rec.getPrescription());
 		
 		//Deduct from inventory the amount used
 		for (PrescribedMedicine p : rec.getPrescription()) {

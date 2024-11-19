@@ -9,6 +9,7 @@ public class DoctorController implements Controller{
 	private ApptDB apptDB;
 	private ApptOutDB apptOutDB;
 	private PatientRecordDB medRecDB;
+	private InventoryDB inventoryDB;
 	private CurrentSession session;
 	
 	/**
@@ -19,11 +20,12 @@ public class DoctorController implements Controller{
 	 * @param medRecDB patient record database
 	 * @param session current session
 	 */
-	public DoctorController(Scanner sc, ApptDB apptDB, ApptOutDB apptOutDB, PatientRecordDB medRecDB, CurrentSession session) {
+	public DoctorController(Scanner sc, ApptDB apptDB, ApptOutDB apptOutDB, PatientRecordDB medRecDB, InventoryDB inventoryDB, CurrentSession session) {
 		this.sc = sc;
 		this.apptDB = apptDB;
 		this.apptOutDB = apptOutDB;
 		this.medRecDB = medRecDB;
+		this.inventoryDB = inventoryDB;
 		this.session = session;
 	}
 	
@@ -109,20 +111,29 @@ public class DoctorController implements Controller{
 	                sc.nextLine();
 	                switch (choice) {
 	                    case 1:
+	                    	
+	                    	inventoryDB.view();
+	                    	
 	                    	String medID;
 	        				System.out.println("Medicine ID:");
 	        				medID = sc.next();
 	        				sc.nextLine();
-	                    	
-	                    	System.out.println("Enter Medicine Name: ");
-	                    	String name = sc.next();
-	                    	sc.nextLine();
-	                    	
-	                    	System.out.println("Enter dosage: ");
-	                    	int dose = sc.nextInt();
-	                    	sc.nextLine();
-	                    	
-	                        record.addPrescription(medID, name, dose);
+	        				
+	        				//Check if the ID is valid
+	        				ArrayList<StockedMedicine> check = FindBy.id(inventoryDB.getDB(), medID);
+	        				if (check.isEmpty()) {
+	        					System.out.println("Invalid ID!");
+	        				}
+	        				else {
+	        					StockedMedicine med = check.get(0);
+		                    	String name = med.getMedName();
+		                    	
+		                    	System.out.println("Enter dosage: ");
+		                    	int dose = sc.nextInt();
+		                    	sc.nextLine();
+		                    	
+		                        record.addPrescription(medID, name, dose);
+	        				}
 	                        break;
 	                    case 2:
 	                    	System.out.println(record.getPrescription());
@@ -299,31 +310,42 @@ public class DoctorController implements Controller{
 			
 			apptOut.setDate(a.getDate());
 			
-			int input=0;
+			int input;
 			do {
 				System.out.println("1) Add Medicine");
 				System.out.println("2) Quit");
 				input = sc.nextInt();
 				
+				if (input < 2) {
+					break;
+				}
+				
 				//Create PrescribedMedicine
+				
+				inventoryDB.view();
+				
 				String medID;
 				System.out.println("Medicine ID:");
 				medID = sc.next();
 				sc.nextLine();
 				
-				String name;
-				System.out.println("Medicine Name:");
-				name = sc.next();
-				sc.nextLine();
-				
-				int dose;
-				System.out.println("Dosage:");
-				dose = sc.nextInt();
-				sc.nextLine();
-				
-				apptOut.addPrescription(medID, name, dose);
-				
-			} while (input <= 1);
+				//Check if the ID is valid
+				ArrayList<StockedMedicine> check = FindBy.id(inventoryDB.getDB(), medID);
+				if (check.isEmpty()) {
+					System.out.println("Invalid ID!");
+				}
+				else {
+					StockedMedicine med = check.get(0);
+                	String name = med.getMedName();
+                	
+                	int dose;
+    				System.out.println("Dosage:");
+    				dose = sc.nextInt();
+    				sc.nextLine();
+    				
+    				apptOut.addPrescription(medID, name, dose);
+				}
+			} while (input < 2);
 			
 			//Add the record to the DB
 			apptOutDB.add(apptOut);

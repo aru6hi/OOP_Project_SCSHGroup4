@@ -35,7 +35,7 @@ public class PrescribedMedicine {
 	}
 
 	public String toString() {
-		return "(" + this.medicineName + " " + this.dosage + ")";
+		return "(" + this.medicineID + " " + this.medicineName + " " + this.dosage + ")";
 	}
 	
 	/**
