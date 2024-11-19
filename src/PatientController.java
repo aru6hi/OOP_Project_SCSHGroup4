@@ -176,6 +176,7 @@ public class PatientController implements Controller{
 				System.out.println("Invalid Appointment ID!");
 			}
 			else {
+				a.get(0).setPatientID(null);
 				a.get(0).setStatus(Status.OPEN);
 				System.out.println("Appointment cancelled!");
 			}
