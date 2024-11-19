@@ -34,7 +34,9 @@ public class HMSApp {
 		PharmacistView phView = new PharmacistView(sc, phCon);
 		LoginView lView = new LoginView(sc, lCon);
 		
-		//Initialize from files
+		//Initialize from files 
+		//HI HI IF YOU ARE THE TA OR PROF TESTING THE CODE
+		//DO REMEMBER TO CHECK THE FILEPATH HERE IS CORRECT FOR YOUR DEVICE
 		ParseFile.parseFilePatient("data\\Patient_List.csv", acctDB, medRecDB);
 		ParseFile.parseFileStaff("data\\Staff_List.csv", acctDB, staffRecDB);
 		ParseFile.parseFileMedicine("data\\Medicine_List.csv", inventoryDB);
