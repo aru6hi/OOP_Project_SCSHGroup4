@@ -41,6 +41,9 @@ public class HMSApp {
 		ParseFile.parseFileStaff("data\\Staff_List.csv", acctDB, staffRecDB);
 		ParseFile.parseFileMedicine("data\\Medicine_List.csv", inventoryDB);
 		
+		//System control flag
+		boolean keepGoing = true;
+		
 		//Start System
 		do {
 			//print login menu
@@ -48,26 +51,31 @@ public class HMSApp {
 			
 			Account activeUser = session.getActiveUser();
 			
-			
-			if (activeUser == null) {
-				System.out.println("No one logged in, terminating...");
-				break;
+			if (activeUser != null) {
+				
+				keepGoing = true;
+				
+				//Print appropriate menu
+				if (session.getActiveUser().hasRole(Role.PATIENT)) {
+					pView.printMenu();
+				}
+				else if (session.getActiveUser().hasRole(Role.DOCTOR)){
+					dView.printMenu();
+				}
+				else if (session.getActiveUser().hasRole(Role.ADMINISTRATOR)) {
+					aView.printMenu();
+				}
+				else if (session.getActiveUser().hasRole(Role.PHARMACIST)){
+					phView.printMenu();
+				}
+			}
+			else {
+				keepGoing = false;
 			}
 			
-			//Print appropriate menu
-			if (session.getActiveUser().hasRole(Role.PATIENT)) {
-				pView.printMenu();
-			}
-			else if (session.getActiveUser().hasRole(Role.DOCTOR)){
-				dView.printMenu();
-			}
-			else if (session.getActiveUser().hasRole(Role.ADMINISTRATOR)) {
-				aView.printMenu();
-			}
-			else if (session.getActiveUser().hasRole(Role.PHARMACIST)){
-				phView.printMenu();
-			}
-			
-		} while (session.getActiveUser() != null);
+		} while (keepGoing);
+		
+		//Exit message
+		System.out.println("Thank you for using the HMS, goodbye :D");
 	}
 } 

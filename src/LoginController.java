@@ -88,7 +88,7 @@ public class LoginController implements Controller{
         Account acct = accountsWithIDAndRole.get(0);
         if (SecurityTools.authenticatePassword(acct.getEncPassword(), password)) {
         	System.out.println("Login Successful!");
-        	session.setActiveUser(acct); //MAke my guy the current session user
+        	session.setActiveUser(acct); //Make my guy the current session user
         }
         else {
         	System.out.println("Wrong Password!");

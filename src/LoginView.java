@@ -24,9 +24,23 @@ public class LoginView implements View{
 		int option;
 		
 		do {
-			System.out.println("1. Login");
-			System.out.println("2. Exit ");
-			System.out.println("3. Start");
+			//Display nice current user
+			Account activeUser = con.getSession().getActiveUser();
+			
+			if (activeUser != null) {
+				System.out.println("Currently logged in: " + activeUser.getRole() + " " + activeUser.getID());
+				
+				System.out.println("1. Login");
+				System.out.println("2. Logout ");
+				System.out.println("3. Start");
+			}
+			else {
+				System.out.println("Currently logged in: NONE");
+				
+				System.out.println("1. Login");
+				System.out.println("2. Logout ");
+				System.out.println("3. Exit");
+			}
 		
 			System.out.print("Enter your choice: ");
 	        option = sc.nextInt();
@@ -34,7 +48,7 @@ public class LoginView implements View{
 	        
 	        chooseOption(option);
 	        
-		} while (option<2);
+		} while (option<3);
         
 	}
 	
