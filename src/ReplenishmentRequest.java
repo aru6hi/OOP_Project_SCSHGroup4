@@ -21,6 +21,10 @@ public class ReplenishmentRequest extends DatabaseItem{
 		this.reqStatus = Status.PENDING;
 	}
 	
+	public String toString() {
+		return "(" + this.getID() + ", " + this.medName + ", " + this.reqAmount + ", " + this.reqStatus + ")";
+	}
+	
 	/**
 	 * Approves a request
 	 */

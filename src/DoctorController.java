@@ -316,7 +316,7 @@ public class DoctorController implements Controller{
 				System.out.println("2) Quit");
 				input = sc.nextInt();
 				
-				if (input == 2) {
+				if (input >= 2) {
 					break;
 				}
 				
