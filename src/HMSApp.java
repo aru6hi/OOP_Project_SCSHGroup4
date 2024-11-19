@@ -44,13 +44,6 @@ public class HMSApp {
 		//System control flag
 		boolean keepGoing = true;
 		
-		//Test Case code
-		ApptOutRecord a = new ApptOutRecord("A0018");
-		a.setStatus(Status.COMPLETED);
-		a.addPrescription("M001", "Panadol", 5);
-		
-		apptOutDB.add(a);
-		
 		//Start System
 		do {
 			//print login menu
