@@ -299,7 +299,7 @@ public class DoctorController implements Controller{
 			
 			apptOut.setDate(a.getDate());
 			
-			int input;
+			int input=0;
 			do {
 				System.out.println("1) Add Medicine");
 				System.out.println("2) Quit");
@@ -323,7 +323,7 @@ public class DoctorController implements Controller{
 				
 				apptOut.addPrescription(medID, name, dose);
 				
-			} while (input < 2);
+			} while (input <= 1);
 			
 			//Add the record to the DB
 			apptOutDB.add(apptOut);
