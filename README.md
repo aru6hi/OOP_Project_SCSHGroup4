@@ -2,11 +2,13 @@
 
 **HMS** is a Java Command Line Interface (CLI) application aimed at automating the management of hospital operations, including patient management, appointment scheduling, staff management, and billing. The system is expected to facilitate efficient management of hospital resources, enhance patient care, and streamline administrative processes.
 
+
 ### Group Members - 
-Lee Chee Raye
-Verma Arushi
-Mittal Palak
-Kee Yu Kai
+- Lee Chee Raye
+- Verma Arushi
+- Mittal Palak
+- Kee Yu Kai
+
 
 ### To run the code:
 1) Clone this repository to your system
